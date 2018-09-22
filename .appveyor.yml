@@ -1,0 +1,25 @@
+os: Visual Studio 2017
+# Build 64-bit MSVC binaries on stable, beta and nightly.  I prefer to use the
+# native toolchain, ie, MSVC, and 32-bit's dead anyway.
+environment:
+  target: x86_64-pc-windows-msvc
+  matrix:
+    - channel: stable
+# Install Rust with rustup
+install:
+  - appveyor DownloadFile https://win.rustup.rs/ -FileName rustup-init.exe
+  - rustup-init -y --default-toolchain %channel% --default-host %target%
+  - set PATH=%PATH%;%USERPROFILE%\.cargo\bin
+  - rustc -vV
+  - cargo -vV
+build_script:
+  - cargo build --verbose
+test_script:
+  - cargo test --verbose
+notifications:
+  - provider: Email
+    to:
+      - '{{commitAuthorEmail}}'
+    on_build_failure: true
+    on_build_success: false
+    on_build_status_changed: false

@@ -1,0 +1,31 @@
+sudo: false
+language: rust
+# We deliberately do NOT cache with `cache: cargo` because these caches grow to
+# gigabytes in size at which point downloading, unpacking and repacking takes
+# way longer than just building things fresh every time.
+
+# Check formatting before running tests, and lint afterwards
+stages:
+  - formatting
+  - test
+  - lint
+
+jobs:
+  include:
+      # Check formatting on rust stable before anything else
+    - stage: formatting
+      rust: stable
+      before_install: rustup component add rustfmt-preview
+      script: cargo fmt -- --check
+
+    - stage: test
+      rust: stable
+    - stage: test
+      rust: beta
+    - stage: test
+      rust: nightly
+
+    - stage: lint
+      rust: stable
+      before_install: rustup component add clippy-preview
+      script: cargo clippy
