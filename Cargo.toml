@@ -1,0 +1,13 @@
+[package]
+name = "git-gone"
+version = "0.1.0-pre"
+description = "Git branches whose updates are gone"
+homepage = "https://github.com/lunaryorn/git-cone"
+repository = "https://github.com/lunaryorn/git-cone"
+keywords = ["git"]
+license = "Apache-2.0"
+authors = ["Sebastian Wiesner <sebastian@swsnr.de>"]
+
+[dependencies]
+clap = "^2"
+git2 = "^0.7"
