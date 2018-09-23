@@ -51,20 +51,39 @@ fn list_gone_branches(repo: &Repository) -> Result<(), Error> {
     Ok(())
 }
 
+fn delete_gone_branches(repo: &Repository) -> Result<(), Error> {
+    for mut branch in find_gone_branches(repo)? {
+        let oid = branch.get().peel_to_commit()?.id();
+        // Take a copy of the name cow because "delete()" borrows mutable
+        let name = String::from_utf8_lossy(branch.name_bytes()?).to_string();
+        branch.delete()?;
+        println!(
+            "Deleted {0} (restore with `git checkout -b {0} {1}`)",
+            name, oid
+        );
+    }
+    Ok(())
+}
+
 fn main() -> Result<(), Box<std::error::Error>> {
-    let app = app_from_crate!().subcommand(
-        SubCommand::with_name("list")
-            .display_order(1)
-            .about("Lists gone branches"),
-    );
+    let app = app_from_crate!()
+        .subcommand(
+            SubCommand::with_name("list")
+                .display_order(1)
+                .about("Lists gone branches"),
+        ).subcommand(
+            SubCommand::with_name("delete")
+                .display_order(2)
+                .about("Deletes gone branches"),
+        );
 
     let matches = app.get_matches();
 
     let repo = Repository::open_from_env()?;
-    match matches.subcommand_name() {
-        Some("list") => list_gone_branches(&repo)?,
-        None => list_gone_branches(&repo)?,
-        Some(name) => panic!("Unexpected subcommand: {}", name),
+    match matches.subcommand_name().unwrap_or("list") {
+        "list" => list_gone_branches(&repo)?,
+        "delete" => delete_gone_branches(&repo)?,
+        name => panic!("Unexpected subcommand: {}", name),
     }
 
     Ok(())
