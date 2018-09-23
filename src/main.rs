@@ -19,7 +19,7 @@
 extern crate clap;
 extern crate git2;
 
-use clap::SubCommand;
+use clap::{Arg, SubCommand};
 use git2::*;
 
 /// Iterate over "gone" branches.
@@ -67,7 +67,12 @@ fn delete_gone_branches(repo: &Repository) -> Result<(), Error> {
 
 fn main() -> Result<(), Box<std::error::Error>> {
     let app = app_from_crate!()
-        .subcommand(
+        .arg(
+            Arg::with_name("fetch")
+                .short("f")
+                .long("fetch")
+                .help("Fetches and prunes all remotes first"),
+        ).subcommand(
             SubCommand::with_name("list")
                 .display_order(1)
                 .about("Lists gone branches"),
@@ -80,6 +85,18 @@ fn main() -> Result<(), Box<std::error::Error>> {
     let matches = app.get_matches();
 
     let repo = Repository::open_from_env()?;
+
+    if matches.is_present("fetch") {
+        for remote_name in repo.remotes()?.iter() {
+            repo.find_remote(remote_name.expect("Non-utf8 remote name found"))?
+                .fetch(
+                    &[],
+                    Some(FetchOptions::new().prune(FetchPrune::On)),
+                    Some("git-gone auto fetch and prune"),
+                )?;
+        }
+    }
+
     match matches.subcommand_name().unwrap_or("list") {
         "list" => list_gone_branches(&repo)?,
         "delete" => delete_gone_branches(&repo)?,
