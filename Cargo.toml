@@ -4,8 +4,10 @@ version = "0.1.0"
 description = "Manage \"gone\" Git branches"
 homepage = "https://github.com/lunaryorn/git-gone"
 repository = "https://github.com/lunaryorn/git-gone"
-keywords = ["git"]
+readme = "README.md"
 license = "Apache-2.0"
+keywords = ["git", "branch", "remote"]
+categories = ["development-tools", "command-line-utilities"]
 authors = ["Sebastian Wiesner <sebastian@swsnr.de>"]
 
 [dependencies]

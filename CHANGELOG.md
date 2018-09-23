@@ -5,8 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+* Add README to cargo metadata
+* Add categories and keywords to cargo metadata
 
-## [0.1] – 2018-09-23
+## [0.1.0] – 2018-09-23
 
 Initial release.
 
