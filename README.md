@@ -45,6 +45,13 @@ Install from [crates.io](https://crates.io/crates/git-gone)
 $ cargo install git-gone
 ```
 
+## Prior art and inspiration
+
+All credits for the idea go to [Eugene Yokota](http://eed3si9n.com/):
+
+* [git gone: cleaning stale local branches](http://eed3si9n.com/git-gone-cleaning-stale-local-branches)
+* [git-gone](https://github.com/eed3si9n/git-gone) in Bash
+
 ## License
 
 Copyright 2018 Sebastian Wiesner <sebastian@swsnr.de>
