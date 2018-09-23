@@ -68,6 +68,11 @@ fn delete_gone_branches(repo: &Repository) -> Result<(), Error> {
 fn main() -> Result<(), Box<std::error::Error>> {
     let app = app_from_crate!()
         .arg(
+            Arg::with_name("verbose")
+                .short("v")
+                .long("verbose")
+                .help("Prints detailed progress when fetching"),
+        ).arg(
             Arg::with_name("fetch")
                 .short("f")
                 .long("fetch")
@@ -83,15 +88,31 @@ fn main() -> Result<(), Box<std::error::Error>> {
         );
 
     let matches = app.get_matches();
+    let verbose = matches.is_present("verbose");
 
     let repo = Repository::open_from_env()?;
 
     if matches.is_present("fetch") {
         for remote_name in repo.remotes()?.iter() {
+            let mut options = FetchOptions::new();
+            options.prune(FetchPrune::On);
+            // Print progress if the user asked for this
+            if verbose {
+                let mut callbacks = RemoteCallbacks::new();
+                callbacks.update_tips(|name, _, new_object| {
+                    if new_object.is_zero() {
+                        println!("{} gone", name);
+                    } else {
+                        println!("{} updated to {}", name, new_object);
+                    }
+                    true
+                });
+                options.remote_callbacks(callbacks);
+            }
             repo.find_remote(remote_name.expect("Non-utf8 remote name found"))?
                 .fetch(
                     &[],
-                    Some(FetchOptions::new().prune(FetchPrune::On)),
+                    Some(&mut options),
                     Some("git-gone auto fetch and prune"),
                 )?;
         }
