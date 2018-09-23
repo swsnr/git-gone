@@ -22,10 +22,7 @@ extern crate git2;
 use clap::{Arg, SubCommand};
 use git2::*;
 
-/// Iterate over "gone" branches.
-///
-/// "gone" branches are branches with an upstream branch that does not exist
-/// anymore.
+/// Iterate over gone branches.
 fn find_gone_branches(repo: &Repository) -> Result<impl Iterator<Item = Branch>, Error> {
     let local_branches = repo
         .branches(Some(BranchType::Local))?
@@ -42,7 +39,7 @@ fn find_gone_branches(repo: &Repository) -> Result<impl Iterator<Item = Branch>,
         }))
 }
 
-/// List all gone branches on standard output.
+/// List all gone branches from the given repo on standard output.
 fn list_gone_branches(repo: &Repository) -> Result<(), Error> {
     for branch in find_gone_branches(repo)? {
         let name = String::from_utf8_lossy(branch.name_bytes()?);
@@ -51,7 +48,8 @@ fn list_gone_branches(repo: &Repository) -> Result<(), Error> {
     Ok(())
 }
 
-fn delete_gone_branches(repo: &Repository) -> Result<(), Error> {
+/// Prune gone branches from the given repository.
+fn prune_gone_branches(repo: &Repository) -> Result<(), Error> {
     for mut branch in find_gone_branches(repo)? {
         let oid = branch.get().peel_to_commit()?.id();
         // Take a copy of the name cow because "delete()" borrows mutable
@@ -71,20 +69,39 @@ fn main() -> Result<(), Box<std::error::Error>> {
             Arg::with_name("verbose")
                 .short("v")
                 .long("verbose")
+                .display_order(2)
                 .help("Prints detailed progress when fetching"),
         ).arg(
             Arg::with_name("fetch")
                 .short("f")
                 .long("fetch")
+                .display_order(1)
                 .help("Fetches and prunes all remotes first"),
         ).subcommand(
             SubCommand::with_name("list")
                 .display_order(1)
-                .about("Lists gone branches"),
+                .about("Lists gone branches (default)"),
         ).subcommand(
-            SubCommand::with_name("delete")
+            SubCommand::with_name("prune")
                 .display_order(2)
-                .about("Deletes gone branches"),
+                .about("Prune gone branches"),
+        ).after_help(
+            "\
+A \"gone\" branch is a local Git branch whose upstream branch no longer exist.
+This frequently occurs in a pull request workflow:
+
+  1. You create a local branch, push it and create a pull request.
+  2. A reviewer merges the pull request and deletes the branch on the server.
+  3. Your local branch still lingers in your clone.
+
+Over time and after many pull request you accumulate many of these branches
+which reference long-merged pull requests and serve no further purpose.
+
+git gone can list these branches and also prune them from your clone.
+
+Copyright (C) 2018 Sebastian Wiesner
+Licensed under the Apache License, Version 2.0
+Report issues to <https://github.com/lunaryorn/git-gone>.",
         );
 
     let matches = app.get_matches();
@@ -120,7 +137,7 @@ fn main() -> Result<(), Box<std::error::Error>> {
 
     match matches.subcommand_name().unwrap_or("list") {
         "list" => list_gone_branches(&repo)?,
-        "delete" => delete_gone_branches(&repo)?,
+        "prune" => prune_gone_branches(&repo)?,
         name => panic!("Unexpected subcommand: {}", name),
     }
 

@@ -1,7 +1,7 @@
 [package]
 name = "git-gone"
 version = "0.1.0-pre"
-description = "Git branches whose updates are gone"
+description = "Manage \"gone\" Git branches"
 homepage = "https://github.com/lunaryorn/git-cone"
 repository = "https://github.com/lunaryorn/git-cone"
 keywords = ["git"]
