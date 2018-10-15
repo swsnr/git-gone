@@ -19,10 +19,16 @@ jobs:
       script: cargo fmt -- --check
 
     - stage: test
+      os: linux
       rust: stable
     - stage: test
+      os: windows
+      rust: stable
+    - stage: test
+      os: linux
       rust: beta
     - stage: test
+      os: linux
       rust: nightly
 
     - stage: lint
