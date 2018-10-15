@@ -2,7 +2,6 @@
 
 [![Current release]( https://img.shields.io/crates/v/git-gone.svg)](https://crates.io/crates/git-gone)
 [![Build status](https://img.shields.io/travis/com/lunaryorn/git-gone/master.svg)](https://travis-ci.com/lunaryorn/git-gone)
-[![Windows build status](https://img.shields.io/appveyor/ci/lunaryorn/git-gone/master.svg)](https://ci.appveyor.com/project/lunaryorn/git-gone)
 
 `git-gone` lists and prunes “gone” branches.
 
