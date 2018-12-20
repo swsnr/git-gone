@@ -15,18 +15,16 @@
 #![deny(warnings)]
 #![cfg_attr(feature = "cargo-clippy", deny(clippy))]
 
-#[macro_use]
-extern crate clap;
-extern crate git2;
-
-use clap::{Arg, SubCommand};
+use clap::{
+    app_from_crate, crate_authors, crate_description, crate_name, crate_version, Arg, SubCommand,
+};
 use git2::*;
 
 /// Iterate over gone branches.
-fn find_gone_branches(repo: &Repository) -> Result<impl Iterator<Item = Branch>, Error> {
+fn find_gone_branches(repo: &Repository) -> Result<impl Iterator<Item = Branch<'_>>, Error> {
     let local_branches = repo
         .branches(Some(BranchType::Local))?
-        .collect::<Result<Vec<(Branch, BranchType)>, Error>>()?;
+        .collect::<Result<Vec<(Branch<'_>, BranchType)>, Error>>()?;
     Ok(local_branches
         .into_iter()
         .map(|item| item.0)
@@ -63,7 +61,7 @@ fn prune_gone_branches(repo: &Repository) -> Result<(), Error> {
     Ok(())
 }
 
-fn main() -> Result<(), Box<std::error::Error>> {
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     let app = app_from_crate!()
         .arg(
             Arg::with_name("verbose")
