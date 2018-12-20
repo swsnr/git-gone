@@ -12,4 +12,4 @@ authors = ["Sebastian Wiesner <sebastian@swsnr.de>"]
 
 [dependencies]
 clap = "^2"
-git2 = "^0.7"
+git2 = "^0.8"
