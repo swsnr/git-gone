@@ -24,6 +24,9 @@ jobs:
       os: windows
       rust: stable
     - stage: test
+      os: osx
+      rust: stable
+    - stage: test
       os: linux
       rust: beta
     - stage: test
