@@ -12,8 +12,7 @@
 // License for the specific language governing permissions and limitations under
 // the License.
 
-#![deny(warnings)]
-#![cfg_attr(feature = "cargo-clippy", deny(clippy))]
+#![deny(warnings, clippy::all)]
 
 use clap::{
     app_from_crate, crate_authors, crate_description, crate_name, crate_version, Arg, SubCommand,
