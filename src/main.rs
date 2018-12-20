@@ -71,21 +71,25 @@ fn main() -> Result<(), Box<std::error::Error>> {
                 .long("verbose")
                 .display_order(2)
                 .help("Prints detailed progress when fetching"),
-        ).arg(
+        )
+        .arg(
             Arg::with_name("fetch")
                 .short("f")
                 .long("fetch")
                 .display_order(1)
                 .help("Fetches and prunes all remotes first"),
-        ).subcommand(
+        )
+        .subcommand(
             SubCommand::with_name("list")
                 .display_order(1)
                 .about("Lists gone branches (default)"),
-        ).subcommand(
+        )
+        .subcommand(
             SubCommand::with_name("prune")
                 .display_order(2)
                 .about("Prune gone branches"),
-        ).after_help(
+        )
+        .after_help(
             "\
 A \"gone\" branch is a local Git branch whose upstream branch no longer exist.
 This frequently occurs in a pull request workflow:
