@@ -26,12 +26,6 @@ jobs:
     - stage: test
       os: osx
       rust: stable
-    - stage: test
-      os: linux
-      rust: beta
-    - stage: test
-      os: linux
-      rust: nightly
 
     - stage: lint
       rust: stable
