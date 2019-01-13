@@ -3,18 +3,25 @@ language: rust
 # gigabytes in size at which point downloading, unpacking and repacking takes
 # way longer than just building things fresh every time.
 
+addons:
+  apt:
+    packages:
+      # Install musl for some Linux builds
+      - musl-tools
+
 # Check formatting before running tests, and lint afterwards
 stages:
   - formatting
   - test
   - lint
+  - release
 
 jobs:
   include:
       # Check formatting on rust stable before anything else
     - stage: formatting
       rust: stable
-      before_install: rustup component add rustfmt-preview
+      before_install: rustup component add rustfmt
       script: cargo fmt -- --check
 
     - stage: test
@@ -29,5 +36,60 @@ jobs:
 
     - stage: lint
       rust: stable
-      before_install: rustup component add clippy-preview
+      before_install: rustup component add clippy
       script: cargo clippy --all-targets
+
+    # Deploy binary to GitHub
+    - &deploy-settings
+      name: Linux binary (static with musl)
+      stage: release
+      if: tag =~ ^v
+      os: linux
+      rust: stable
+      before_install: rustup target add x86_64-unknown-linux-musl
+      env:
+        - CARGOTARGET=x86_64-unknown-linux-musl
+      # Inhibit Travis’ default "cargo build --verbose" install step because we
+      # make an explicit release build in the "script" phase
+      install: ""
+      script: cargo build --target "$CARGOTARGET" --release --verbose
+      before_deploy:
+        # Strip the binary to reduce its size
+        - strip "target/${CARGOTARGET}/release/git-gone"
+        # Put all the things into a dedicated directory, as usual with TAR files
+        - export ARCHIVE_NAME="git-gone-${TRAVIS_TAG}-${CARGOTARGET}"
+        - echo "Building ${ARCHIVE_NAME}"
+        - mkdir "/tmp/${ARCHIVE_NAME}"
+        - cp README.md CHANGELOG.md LICENSE "/tmp/${ARCHIVE_NAME}"
+        - cp "target/${CARGOTARGET}/release/git-gone" "/tmp/${ARCHIVE_NAME}"
+        # Pack the tarball
+        - export ARCHIVE_FILE="/tmp/${ARCHIVE_NAME}.tar.gz"
+        - tar -czf "${ARCHIVE_FILE}" -C /tmp/ "${ARCHIVE_NAME}"
+      deploy:
+        skip_cleanup: true
+        provider: releases
+        api_key:
+          secure: "aBxDs8za03v2XxGjkwzKNxMkDIKJ/XxYhl7m9Sp52iDhKJzgZfvRu1BN3lNk0lugSVkHP/ThXddY0OhDqINDQhkujU3Hi5V00NPApAFvp4bdQwoHQ0ACw+OhINzBch39++9lBZ32hwJ4wO+jJBS/lM9niVm1KCy1P9t85/CD3sImBurhuNSiiokhcVn2fF2+EAnXrExjVKKyfw580wERsqadnsnrB+/TUsUF+d2faMHHbu2aqDScgITCV7vRVhmpof5FxEC1lSFH8IujDut17hkMT26h5DOpZhTI4G2LJdd6+x2vsm7whpV8vITh2riNIs5I9yELoIJgpqvvc0G2sYTSnitCZFZbk8LpWvOOh90t3lgmFxwPXoE5arX3lJT/Qzba7yA+B/WkCOGwYzOj3BHDCBzDsnk278wpTl1aU94fbC9WBAVakenM/obQtPj7kK1KIH3zajGRX6dIgRk39PnOC066OzdNGJIsM2f6K+2K5M21hidzWQlGOFwv2Z1fPpjuXgQm1S6rj2m1Kzn+OZMxJzUTBY9+uVQW4bwdwGvEMPZwQD5+s+wZ4FT7ZY2vfUY5Mem6+2G7DRuW8e2CRrdulm4ExZpjElJK+QP0Pauc/zlZq7HVTjm6k4mDawjZhMZ6zue0NaqSnm3neL983xRHrvQD8S37HqvpzvWry/I="
+        file: "${ARCHIVE_FILE}"
+        on:
+          tags: true
+    - <<: *deploy-settings
+      name: macOS binary
+      os: osx
+      before_install: ""
+      env:
+        - CARGOTARGET=x86_64-apple-darwin
+    - <<: *deploy-settings
+      name: Windows binary
+      os: windows
+      before_install: ""
+      env:
+        - CARGOTARGET=x86_64-pc-windows-msvc
+      before_deploy:
+        # Windows likes file extensions :)
+        - mv LICENSE LICENSE.txt
+        # and ZIP files
+        - export ARCHIVE_FILE="git-gone-${TRAVIS_TAG}-${CARGOTARGET}.zip"
+        # The leading dots are important: They make 7z ignore the path part and
+        # add the file directly to the archive root.
+        - 7z a "${ARCHIVE_FILE}" "./target/${CARGOTARGET}/release/git-gone.exe" ./README.md ./CHANGELOG.md ./LICENSE.txt
