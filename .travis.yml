@@ -3,12 +3,6 @@ language: rust
 # gigabytes in size at which point downloading, unpacking and repacking takes
 # way longer than just building things fresh every time.
 
-addons:
-  apt:
-    packages:
-      # Install musl for some Linux builds
-      - musl-tools
-
 # Check formatting before running tests, and lint afterwards
 stages:
   - formatting
@@ -41,14 +35,13 @@ jobs:
 
     # Deploy binary to GitHub
     - &deploy-settings
-      name: Linux binary (static with musl)
+      name: macOS binary
       stage: release
       if: tag =~ ^v
-      os: linux
+      os: osx
       rust: stable
-      before_install: rustup target add x86_64-unknown-linux-musl
       env:
-        - CARGOTARGET=x86_64-unknown-linux-musl
+        - CARGOTARGET=x86_64-apple-darwin
       # Inhibit Travis’ default "cargo build --verbose" install step because we
       # make an explicit release build in the "script" phase
       install: ""
@@ -73,12 +66,6 @@ jobs:
         file: "${ARCHIVE_FILE}"
         on:
           tags: true
-    - <<: *deploy-settings
-      name: macOS binary
-      os: osx
-      before_install: ""
-      env:
-        - CARGOTARGET=x86_64-apple-darwin
     - <<: *deploy-settings
       name: Windows binary
       os: windows
