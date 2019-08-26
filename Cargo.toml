@@ -13,4 +13,4 @@ edition = "2018"
 
 [dependencies]
 clap = "^2"
-git2 = "^0.9"
+git2 = "^0.10"
