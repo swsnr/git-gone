@@ -12,27 +12,6 @@ stages:
 
 jobs:
   include:
-      # Check formatting on rust stable before anything else
-    - stage: formatting
-      rust: stable
-      before_install: rustup component add rustfmt
-      script: cargo fmt -- --check
-
-    - stage: test
-      os: linux
-      rust: stable
-    - stage: test
-      os: windows
-      rust: stable
-    - stage: test
-      os: osx
-      rust: stable
-
-    - stage: lint
-      rust: stable
-      before_install: rustup component add clippy
-      script: cargo clippy --all-targets
-
     # Deploy binary to GitHub
     - &deploy-settings
       name: macOS binary
