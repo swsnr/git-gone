@@ -19,7 +19,25 @@ use clap::{
 };
 use git2::*;
 
+/// Whether a branch has an upstream.
+///
+/// Try to get the name of the upstream branch of the given branch.  If it
+/// exists the branch has an upstream, otherwise it hasn't.
+fn has_upstream(repo: &Repository, branch: &Branch) -> bool {
+    // branch_upstream_name expects the full refname (e.g. refs/heads/…) so
+    // we move the underlying reference with .get().
+    branch
+        .get()
+        .name()
+        .map_or(false, |refname| repo.branch_upstream_name(&refname).is_ok())
+}
+
 /// Iterate over gone branches.
+///
+/// Find all branches which still have an upstream branch configured, but
+/// whose upstream doesn't exist anymore.  These branches had an upstream once
+/// probably because they were pushed, but the upstream is gone, e.g. was
+/// deleted on the remote.
 fn find_gone_branches(repo: &Repository) -> Result<impl Iterator<Item = Branch<'_>>, Error> {
     let local_branches = repo
         .branches(Some(BranchType::Local))?
@@ -27,6 +45,10 @@ fn find_gone_branches(repo: &Repository) -> Result<impl Iterator<Item = Branch<'
     Ok(local_branches
         .into_iter()
         .map(|item| item.0)
+        // Look at branches which have an upstream branch…
+        .filter(move |branch| has_upstream(repo, branch))
+        // …and if that upstream doesn't exist anymore, we have a branch which
+        // had an upstream once, but no more, so the upstream’s gone.
         .filter(|branch| {
             branch
                 .upstream()
