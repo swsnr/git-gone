@@ -27,3 +27,8 @@ Initial release.
 * Add `list` subcommand to list gone branches.
 * Add `prune` subcommand to prune gone branches.
 * Add `--fetch` flag to fetch all remotes before looking for gone branches.
+
+[0.1.0]: https://github.com/lunaryorn/git-gone/releases/tag/v0.1.0
+[0.1.1]: https://github.com/lunaryorn/git-gone/compare/v0.1.0...v0.1.1
+[0.1.2]: https://github.com/lunaryorn/git-gone/compare/v0.1.1...v0.1.2
+[Unreleased]: https://github.com/lunaryorn/git-gone/compare/v0.1.2...HEAD
