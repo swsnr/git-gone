@@ -7,7 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 ## [Unreleased]
 ### Fixed
 * Properly detect gone branches by looking at branches that used to have an
-  upstream.
+  upstream (see [GH-8]).
+
+[GH-8]: https://github.com/lunaryorn/git-gone/pull/8
 
 ## [0.1.2] – 2019-01-13
 ### Added
