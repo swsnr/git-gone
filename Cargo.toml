@@ -13,7 +13,4 @@ edition = "2018"
 
 [dependencies]
 clap = "^2"
-git2 = "^0.10"
-
-[patch.crates-io]
-git2 = { git = "https://github.com/rust-lang/git2-rs.git" }
+git2 = "^0.10.2"
