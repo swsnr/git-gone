@@ -23,11 +23,11 @@ jobs:
           toolchain: stable
           override: true
           target: ${{ matrix.target }}
-      - name: cargo test --release
+      - name: cargo build --release
         uses: actions-rs/cargo@v1
         with:
           command: build
-          args: --release
+          args: --release --target ${{ matrix.target }} --verbose
       - name: strip
         run: strip 'target/${{ matrix.target }}/release/git-gone'
         if: "!contains(matrix.target, 'windows')"
