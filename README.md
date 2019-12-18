@@ -43,6 +43,10 @@ Install from [crates.io](https://crates.io/crates/git-gone)
 $ cargo install git-gone
 ```
 
+The [Releases] page offers pre-built binaries for common systems.
+
+[Releases]: https://github.com/lunaryorn/git-gone/releases
+
 ## Prior art and inspiration
 
 All credits for the idea go to [Eugene Yokota](http://eed3si9n.com/):
