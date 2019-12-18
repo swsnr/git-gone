@@ -6,7 +6,7 @@ on:
       - v*
 
 jobs:
-  unix:
+  package:
     runs-on: '${{ matrix.os }}'
     strategy:
       matrix:
