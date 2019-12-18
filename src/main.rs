@@ -18,6 +18,7 @@ use clap::{
     app_from_crate, crate_authors, crate_description, crate_name, crate_version, Arg, SubCommand,
 };
 use git2::*;
+use std::process::Command;
 
 /// Whether a branch has an upstream.
 ///
@@ -133,29 +134,25 @@ Report issues to <https://github.com/lunaryorn/git-gone>.",
     let repo = Repository::open_from_env()?;
 
     if matches.is_present("fetch") {
-        for remote_name in repo.remotes()?.iter() {
-            let mut options = FetchOptions::new();
-            options.prune(FetchPrune::On);
-            // Print progress if the user asked for this
-            if verbose {
-                let mut callbacks = RemoteCallbacks::new();
-                callbacks.update_tips(|name, _, new_object| {
-                    if new_object.is_zero() {
-                        println!("{} gone", name);
-                    } else {
-                        println!("{} updated to {}", name, new_object);
-                    }
-                    true
-                });
-                options.remote_callbacks(callbacks);
-            }
-            repo.find_remote(remote_name.expect("Non-utf8 remote name found"))?
-                .fetch(
-                    &[],
-                    Some(&mut options),
-                    Some("git-gone auto fetch and prune"),
-                )?;
+        let mut command = Command::new("git");
+        command.arg("fetch").arg("--prune").arg("--all");
+        if !verbose {
+            command.arg("--quiet");
         }
+        command
+            .spawn()
+            .and_then(|mut c| c.wait())
+            .and_then(|status| {
+                if status.success() {
+                    Ok(())
+                } else {
+                    use std::io::{Error, ErrorKind};
+                    Err(Error::new(
+                        ErrorKind::Other,
+                        "git fetch --prune --all failed",
+                    ))
+                }
+            })?;
     }
 
     match matches.subcommand_name().unwrap_or("list") {

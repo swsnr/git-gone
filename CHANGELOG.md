@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+* Shell out to `git fetch --prune --all` for `-f/--fetch`, and thus use Git's
+  mechanisms for authentication (see [GH-5]) and the standard pretty output.
+  Hence `git gone -f` now requires `git` in `$PATH`.
+
+[GH-5]: https://github.com/lunaryorn/git-gone/issues/5
 
 ## [0.2.0] – 2019-11-30
 ### Fixed
