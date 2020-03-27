@@ -1,7 +1,5 @@
 # git-gone
 
-[![Current release]( https://img.shields.io/crates/v/git-gone.svg)](https://crates.io/crates/git-gone)
-
 `git-gone` lists and prunes “gone” branches.
 
 A “gone” branch is a local branch whose upstream branch no longer exists. This
