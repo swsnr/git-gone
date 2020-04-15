@@ -22,6 +22,18 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: --all-targets
 
+  doc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-ruby@v1
+      - name: Install asciidoctor
+        run: gem install asciidoctor
+      - name: Build manpage
+        run: asciidoctor -b manpage git-gone.1.adoc
+      - name: Check changes
+        run: git diff --quiet -- git-gone.1.adoc
+
   test:
     strategy:
       matrix:

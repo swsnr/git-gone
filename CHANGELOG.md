@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+* Add `git-gone(1)` man page (see [GH-10])
+
+[GH-10]: https://github.com/lunaryorn/git-gone/pull/10
 
 ## [0.3.0] – 2019-12-18
 ### Changed

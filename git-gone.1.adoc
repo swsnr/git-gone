@@ -1,0 +1,76 @@
+= git-gone(1)
+Sebastian Wiesner <sebastian@swsnr.de>
+:doctype: manpage
+:revnumber: 0.3.0
+:revdate: 2019-12-18
+:mansource: git-gone {revnumber}
+:manmanual: git-gone
+
+== Name
+
+git-gone - prune "gone" Git branches
+
+== Synopsis
+
+*git gone* [_-fv_] list +
+*git gone* [_-fv_] prune
+
+== Description
+
+Lists or removes "gone" branches, that is, local branches which used to have an upstream branch on a remote which is now removed.
+
+This situation typically occurs in a pull request workflow where the upstream branch gets deleted on the server after merging a pull request, leaving the local branch from which the pull request originated in place.
+*git gone* easily removes these left-over branches.
+
+== Commands
+
+list::
+    List all gone branches.
+
+prune::
+    Delete all gone branches.
++
+Prints a list of deleted branches including a command to restore the branch as long as the referenced commit is still in the reflog.
+
+== Options
+
+-f::
+--fetch::
+    Run *git fetch --prune --all* first.
+
+-v::
+--verbose::
+    Print detailed progress when fetching.
+
+-V::
+--version::
+    Print the version number and exit.
+
+== Exit status
+
+0 on success, non-zero otherwise.
+
+== Bugs
+
+Please report bugs to https://github.com/lunaryorn/git-gone/issues.
+
+== See also
+
+*git(1)*
+
+All credits for the idea go to Eugene Yokota (see http://eed3si9n.com/):
+
+- git gone: cleaning stale local branches at http://eed3si9n.com/git-gone-cleaning-stale-local-branches
+- git-gone in Bash at https://github.com/eed3si9n/git-gone
+
+
+== Copyright
+
+Copyright 2018-2019 Sebastian Wiesner <sebastian@swsnr.de>
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+You may obtain a copy of the License at <http://www.apache.org/licenses/LICENSE-2.0>.
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and limitations under the License.
+
