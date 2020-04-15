@@ -4,10 +4,10 @@
 .\" Generator: Asciidoctor 2.0.10
 .\"      Date: 2020-04-15
 .\"    Manual: git-gone
-.\"    Source: git-gone 0.3.0
+.\"    Source: git-gone 0.3.1
 .\"  Language: English
 .\"
-.TH "GIT\-GONE" "1" "2020-04-15" "git\-gone 0.3.0" "git\-gone"
+.TH "GIT\-GONE" "1" "2020-04-15" "git\-gone 0.3.1" "git\-gone"
 .ie \n(.g .ds Aq \(aq
 .el       .ds Aq '
 .ss \n[.ss] 0
@@ -36,12 +36,10 @@ git\-gone \- prune "gone" Git branches
 \fBgit gone\fP [\fI\-fv\fP] prune
 .SH "DESCRIPTION"
 .sp
-Lists or removes "gone" branches, that is, local branches which used to have an
-upstream branch on a remote which is now removed.
+Lists or removes "gone" branches, that is, local branches which used to have an upstream branch on a remote which is now removed.
 .sp
-This situation typically occurs in a pull request workflow where the upstream
-branch gets deleted on the server after merging a pull request, leaving the
-local branch from which the pull request originated in place.
+This situation typically occurs in a pull request workflow where the upstream branch gets deleted on the server after merging a pull request, leaving the local branch from which the pull request originated in place.
+\fBgit gone\fP easily removes these left\-over branches.
 .SH "COMMANDS"
 .sp
 list
@@ -53,8 +51,7 @@ prune
 .RS 4
 Delete all gone branches.
 .sp
-Prints a list of deleted branches including a command to restore the branch as
-long as the referenced commit is still in the reflog.
+Prints a list of deleted branches including a command to restore the branch as long as the referenced commit is still in the reflog.
 .RE
 .SH "OPTIONS"
 .sp
@@ -114,15 +111,12 @@ git\-gone in Bash at \c
 Copyright 2018\-2019 Sebastian Wiesner <\c
 .MTO "sebastian\(atswsnr.de" "" ">"
 .sp
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License. You may obtain a copy of the
-License at \c
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+You may obtain a copy of the License at \c
 .URL "http://www.apache.org/licenses/LICENSE\-2.0" "" "."
 .sp
-Unless required by applicable law or agreed to in writing, software distributed
-under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-CONDITIONS OF ANY KIND, either express or implied. See the License for the
-specific language governing permissions and limitations under the License.
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and limitations under the License.
 .SH "AUTHOR"
 .sp
 Sebastian Wiesner

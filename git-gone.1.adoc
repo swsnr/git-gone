@@ -1,8 +1,8 @@
 = git-gone(1)
 Sebastian Wiesner <sebastian@swsnr.de>
 :doctype: manpage
-:revnumber: 0.3.0
-:revdate: 2019-12-18
+:revnumber: 0.3.1
+:revdate: 2020-04-15
 :mansource: git-gone {revnumber}
 :manmanual: git-gone
 
