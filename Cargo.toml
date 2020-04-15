@@ -10,6 +10,7 @@ keywords = ["git", "branch", "remote"]
 categories = ["development-tools", "command-line-utilities"]
 authors = ["Sebastian Wiesner <sebastian@swsnr.de>"]
 edition = "2018"
+include = ["git-gone.1", "git-gone.1.adoc"]
 
 [dependencies]
 clap = "^2"
