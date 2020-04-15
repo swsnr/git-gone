@@ -6,10 +6,8 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
+
 ## [0.3.1] – 2020-04-15
-$a
-[0.3.1]: https://github.com/lunaryorn/git-gone/compare/vv0.3.0...v0.3.1
-[Unreleased]: https://github.com/lunaryorn/git-gone/compare/v0.3.1...HEAD
 ### Added
 * Add `git-gone(1)` man page (see [GH-10])
 
@@ -57,3 +55,5 @@ Initial release.
 [0.1.2]: https://github.com/lunaryorn/git-gone/compare/v0.1.1...v0.1.2
 [0.2.0]: https://github.com/lunaryorn/git-gone/compare/v0.1.2...v0.2.0
 [0.3.0]: https://github.com/lunaryorn/git-gone/compare/vv0.2.0...v0.3.0
+[0.3.1]: https://github.com/lunaryorn/git-gone/compare/vv0.3.0...v0.3.1
+[Unreleased]: https://github.com/lunaryorn/git-gone/compare/v0.3.1...HEAD
