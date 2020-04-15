@@ -45,10 +45,10 @@ latest_tag="$(git tag --sort '-v:refname' | grep '^v[0-9]' | head -n1)"
 release_date="$(date +%Y-%m-%d)"
 
 # Substitute version in Cargo.toml and manpage
-sed -i '' "1,/^version =/ s/^version = .*$/version = \"$next_version\"/" Cargo.toml
-sed -i '' "1,/^:revnumber:/ s/^:revnumber: .*$/:revnumber: $next_version/" git-gone.1.adoc
+sed -i'' "1,/^version =/ s/^version = .*$/version = \"$next_version\"/" Cargo.toml
+sed -i'' "1,/^:revnumber:/ s/^:revnumber: .*$/:revnumber: $next_version/" git-gone.1.adoc
 # Update release date in manpage
-sed -i '' "1,/^:revdate:/ s/^:revdate: .*$/:revdate: $release_date/" git-gone.1.adoc
+sed -i'' "1,/^:revdate:/ s/^:revdate: .*$/:revdate: $release_date/" git-gone.1.adoc
 # Make cargo update the version in the lockfile as well
 cargo metadata --format-version 1 >/dev/null
 # Add both files to Git
@@ -69,7 +69,7 @@ sed -e "/^## \[Unreleased\]\$/ a\\
 [$next_version]: https://github.com/lunaryorn/git-gone/compare/v${latest_tag}...v${next_version}\\
 [Unreleased]: https://github.com/lunaryorn/git-gone/compare/v${next_version}...HEAD" \
     -e '/^\[Unreleased\]:/ D' \
-    -i '' CHANGELOG.md
+    -i'' CHANGELOG.md
 git add CHANGELOG.md
 
 git commit -m "Release $next_version"
