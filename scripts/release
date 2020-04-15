@@ -70,6 +70,7 @@ sed -e "/^## \[Unreleased\]\$/ a\\
 git add CHANGELOG.md
 
 git commit -m "Release $next_version"
-git tag -m "git-gone $next_version" "v$next_version"
 cargo publish --no-verify
+# Tag and push after successful publish
+git tag -m "git-gone $next_version" "v$next_version"
 git push --follow-tags origin master
