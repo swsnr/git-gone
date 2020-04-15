@@ -1,6 +1,6 @@
 [package]
 name = "git-gone"
-version = "0.3.1"
+version = "0.3.2"
 description = "Manage \"gone\" Git branches"
 homepage = "https://github.com/lunaryorn/git-gone"
 repository = "https://github.com/lunaryorn/git-gone"
