@@ -14,4 +14,4 @@ include = ["git-gone.1", "git-gone.1.adoc"]
 
 [dependencies]
 clap = "^2"
-git2 = "^0.10.2"
+git2 = "^0.13"

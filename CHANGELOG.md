@@ -8,6 +8,9 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 ### Added
 * Add `git-gone(1)` man page (see [GH-10])
 
+### Changed
+* Update git2 dependency to 0.13.
+
 [GH-10]: https://github.com/lunaryorn/git-gone/pull/10
 
 ## [0.3.0] – 2019-12-18
