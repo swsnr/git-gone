@@ -1,4 +1,4 @@
-// Copyright 2018-2019 Sebastian Wiesner <sebastian@swsnr.de>
+// Copyright 2018-2020 Sebastian Wiesner <sebastian@swsnr.de>
 
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not
 // use this file except in compliance with the License. You may obtain a copy of
@@ -123,7 +123,7 @@ which reference long-merged pull requests and serve no further purpose.
 
 git gone can list these branches and also prune them from your clone.
 
-Copyright (C) 2018 Sebastian Wiesner
+Copyright (C) 2018–2020 Sebastian Wiesner
 Licensed under the Apache License, Version 2.0
 Report issues to <https://github.com/lunaryorn/git-gone>.",
         );
