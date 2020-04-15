@@ -61,7 +61,7 @@ git add git-gone.1 git-gone.1.adoc
 # 3. Delete the old link reference for the Unreleased header
 sed -e "/^## \[Unreleased\]\$/ a\\
 \\
-## [${next_version}] – ${release_date}\\" \
+## [${next_version}] – ${release_date}" \
     -e "\$a\\
 [$next_version]: https://github.com/lunaryorn/git-gone/compare/v${latest_tag}...v${next_version}\\
 [Unreleased]: https://github.com/lunaryorn/git-gone/compare/v${next_version}...HEAD" \
