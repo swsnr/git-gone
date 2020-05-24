@@ -14,4 +14,10 @@ include = ["git-gone.1", "git-gone.1.adoc"]
 
 [dependencies]
 clap = "^2"
-git2 = "^0.13"
+
+[dependencies.git2]
+version = "^0.13"
+# Disable all features of git2; we only use a small subset of the library and do not need any of these.
+# Specifically this also disables SSL and SSH support and thus removes library dependencies, which permits
+# a static musl build.
+default-features = false
