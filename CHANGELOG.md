@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.3.6] – 2020-06-14
 ### Changed
 - Update dependencies.
 
@@ -80,4 +82,5 @@ Initial release.
 [0.3.3]: https://github.com/lunaryorn/git-gone/compare/vv0.3.2...v0.3.3
 [0.3.4]: https://github.com/lunaryorn/git-gone/compare/vv0.3.3...v0.3.4
 [0.3.5]: https://github.com/lunaryorn/git-gone/compare/vv0.3.4...v0.3.5
-[Unreleased]: https://github.com/lunaryorn/git-gone/compare/v0.3.5...HEAD
+[0.3.6]: https://github.com/lunaryorn/git-gone/compare/vv0.3.5...v0.3.6
+[Unreleased]: https://github.com/lunaryorn/git-gone/compare/v0.3.6...HEAD
