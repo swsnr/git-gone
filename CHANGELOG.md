@@ -5,9 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Fix checksum calculation for releases.
 
 ## [0.3.4] – 2020-06-14
-## Changed
+### Changed
 - Upload release artifacts in an extra step.
 - Include release changelog in release description.
 - Add checksums to release workflow.
