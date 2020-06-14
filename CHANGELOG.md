@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 ## Changed
 - Upload release artifacts in an extra step.
 - Include release changelog in release description.
+- Add checksums to release workflow.
 
 ## [0.3.3] – 2020-05-24
 ### Added

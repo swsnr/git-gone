@@ -78,6 +78,12 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           path: ./binaries
+      - name: Compute checksums
+        shell: bash
+        run: |
+          for directory in *.zip; do (
+            cd "$directory"; shopt -s nullglob; b2sum *.zip *.tar.gz >> ../B2SUMS.txt; sha512sum *.zip *.tar.gz >> ../SHA512SUM.txt
+          ); done
       - name: Get version
         id: version
         shell: bash
@@ -99,5 +105,7 @@ jobs:
           files: |
             ./binaries/**/*.zip
             ./binaries/**/*.tar.gz
+            ./binaries/B2SUMS.txt
+            ./binaries/SHA512SUM.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
