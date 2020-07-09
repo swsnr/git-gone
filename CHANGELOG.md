@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Include source files in crate distributions; fixes building from source with
+  `cargo install` (see [GH-12]).
+
+GH-12: https://github.com/lunaryorn/git-gone/issues/12
 
 ## [0.3.6] – 2020-06-14
 ### Changed
