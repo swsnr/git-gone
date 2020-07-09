@@ -35,7 +35,7 @@ jobs:
       - name: Build README
         run: MANWIDTH=80 man -l git-gone.1 > README
       - name: Check changes
-        run: git diff --quiet -- git-gone.1 README
+        run: git --no-pager diff --exit-code -- git-gone.1 README
 
   test:
     strategy:
