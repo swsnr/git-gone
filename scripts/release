@@ -53,7 +53,7 @@ git add Cargo.toml Cargo.lock
 sed -i'' "1,/^:revnumber:/ s/^:revnumber: .*$/:revnumber: $next_version/" git-gone.1.adoc
 sed -i'' "1,/^:revdate:/ s/^:revdate: .*$/:revdate: $release_date/" git-gone.1.adoc
 asciidoctor -b manpage git-gone.1.adoc
-MANWIDTH=80 man -l ./git-gone.1.adoc > README
+MANWIDTH=80 man -l ./git-gone.1 > README
 git add git-gone.1 git-gone.1.adoc
 
 # Update the changelog:
