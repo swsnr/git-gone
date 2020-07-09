@@ -52,7 +52,7 @@ dependencies = [
 
 [[package]]
 name = "git-gone"
-version = "0.3.6"
+version = "0.3.7"
 dependencies = [
  "clap 2.33.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "git2 0.13.6 (registry+https://github.com/rust-lang/crates.io-index)",
