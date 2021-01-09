@@ -14,7 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 - Include source files in crate distributions; fixes building from source with
   `cargo install` (see [GH-12]).
 
-GH-12: https://github.com/lunaryorn/git-gone/issues/12
+[GH-12]: https://github.com/lunaryorn/git-gone/issues/12
 
 ## [0.3.6] – 2020-06-14
 ### Changed
