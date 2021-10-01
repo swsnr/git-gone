@@ -30,7 +30,7 @@ fn has_upstream(repo: &Repository, branch: &Branch) -> bool {
     branch
         .get()
         .name()
-        .map_or(false, |refname| repo.branch_upstream_name(&refname).is_ok())
+        .map_or(false, |refname| repo.branch_upstream_name(refname).is_ok())
 }
 
 /// Iterate over gone branches.
