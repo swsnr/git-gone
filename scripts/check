@@ -11,6 +11,6 @@ git --no-pager diff --exit-code -- git-gone.1 README
 cargo fmt -- --check
 
 # Build and lint
-cargo build ${CARGOFLAGS:-}
+cargo build --all-targets ${CARGOFLAGS:-}
 cargo clippy --all-targets ${CARGOFLAGS:-}
-cargo test ${CARGOFLAGS:-}
+cargo test --all-targets ${CARGOFLAGS:-}
