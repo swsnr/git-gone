@@ -1,6 +1,6 @@
 [package]
 name = "git-gone"
-version = "0.3.7"
+version = "0.3.8"
 description = "Manage \"gone\" Git branches"
 homepage = "https://codeberg.org/flausch/git-gone"
 repository = "https://codeberg.org/flausch/git-gone"
