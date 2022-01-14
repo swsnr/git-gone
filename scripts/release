@@ -33,12 +33,6 @@ if [[ "$(git symbolic-ref --short HEAD)" != "main" ]]; then
     exit 1
 fi
 
-ci_status="$(hub ci-status HEAD)"
-if [[ "${ci_status}" != "success" ]]; then
-    echo "CI for HEAD pending or failed (${ci_status}); aborting"
-    exit 1
-fi
-
 latest_tag="$(git tag --sort '-v:refname' | grep '^v[0-9]' | head -n1)"
 release_date="$(date +%Y-%m-%d)"
 
