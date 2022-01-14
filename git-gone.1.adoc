@@ -52,7 +52,7 @@ Prints a list of deleted branches including a command to restore the branch as l
 
 == Bugs
 
-Please report bugs to https://github.com/lunaryorn/git-gone/issues.
+Please report bugs to https://codeberg.org/flausch/git-gone/issues.
 
 == See also
 
