@@ -6,6 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
+### Changed
+- Migrate code to <https://codeberg.org/flausch/git-gone/tags>
+
 ## [0.3.7] – 2020-07-09
 ### Changed
 - Update dependencies to remove yanked `small_vec` version from build.
