@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -euxo pipefail
+
+# Build manpage and update README
+asciidoctor -b manpage -a reproducible git-gone.1.adoc
+MANWIDTH=80 man -l git-gone.1 > README
+git --no-pager diff --exit-code -- git-gone.1 README
+
+# Check formatting
+cargo fmt -- --check
+
+# Build and lint
+cargo build ${CARGOFLAGS:-}
+cargo clippy --all-targets ${CARGOFLAGS:-}
+cargo test ${CARGOFLAGS:-}
