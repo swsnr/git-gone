@@ -24,6 +24,6 @@ git --no-pager diff --exit-code -- git-gone.1 README
 cargo fmt -- --check
 
 # Build and lint
-cargo build --all-targets ${CARGOFLAGS:-}
-cargo clippy --all-targets ${CARGOFLAGS:-}
-cargo test --all-targets ${CARGOFLAGS:-}
+cargo build --locked --all-targets ${CARGOFLAGS:-}
+cargo clippy --locked --all-targets ${CARGOFLAGS:-}
+cargo test --locked --all-targets ${CARGOFLAGS:-}
