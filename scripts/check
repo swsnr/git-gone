@@ -29,3 +29,6 @@ cargo fmt -- --check
 cargo build --locked --all-targets ${CARGOFLAGS:-}
 cargo clippy --locked --all-targets ${CARGOFLAGS:-}
 cargo test --locked --all-targets ${CARGOFLAGS:-}
+
+# Check advisories and licenses
+cargo deny check
