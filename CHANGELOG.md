@@ -6,6 +6,8 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
+## [0.4.0] – 2022-09-18
+
 ### Changed
 - Update git2 dependency.
 
@@ -102,5 +104,6 @@ Initial release.
 [0.3.5]: https://codeberg.org/flausch/git-gone/compare/v0.3.4...v0.3.5
 [0.3.6]: https://codeberg.org/flausch/git-gone/compare/v0.3.5...v0.3.6
 [0.3.7]: https://codeberg.org/flausch/git-gone/compare/v0.3.6...v0.3.7
-[Unreleased]: https://codeberg.org/flausch/git-gone/compare/v0.3.8...HEAD
+[Unreleased]: https://codeberg.org/flausch/git-gone/compare/v0.4.0...HEAD
+[0.4.0]: https://codeberg.org/flausch/git-gone/compare/v0.3.8...v0.4.0
 [0.3.8]: https://codeberg.org/flausch/git-gone/compare/v0.3.7...v0.3.8
