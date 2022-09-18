@@ -14,11 +14,7 @@
 
 #![deny(warnings, clippy::all)]
 
-use clap::{
-    app_from_crate, crate_authors, crate_description, crate_name, crate_version, Arg, SubCommand,
-};
 use git2::*;
-use std::process::Command;
 
 /// Whether a branch has an upstream.
 ///
@@ -84,28 +80,31 @@ fn prune_gone_branches(repo: &Repository) -> Result<(), Error> {
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let app = app_from_crate!()
+    use clap::*;
+    let app = command!()
         .arg(
-            Arg::with_name("verbose")
-                .short("v")
+            Arg::new("verbose")
+                .short('v')
                 .long("verbose")
                 .display_order(2)
-                .help("Prints detailed progress when fetching"),
+                .help("Prints detailed progress when fetching")
+                .action(clap::ArgAction::SetTrue),
         )
         .arg(
-            Arg::with_name("fetch")
-                .short("f")
+            Arg::new("fetch")
+                .short('f')
                 .long("fetch")
                 .display_order(1)
-                .help("Fetches and prunes all remotes first"),
+                .help("Fetches and prunes all remotes first")
+                .action(clap::ArgAction::SetTrue),
         )
         .subcommand(
-            SubCommand::with_name("list")
+            Command::new("list")
                 .display_order(1)
                 .about("Lists gone branches (default)"),
         )
         .subcommand(
-            SubCommand::with_name("prune")
+            Command::new("prune")
                 .display_order(2)
                 .about("Prune gone branches"),
         )
@@ -128,13 +127,13 @@ Licensed under the Apache License, Version 2.0
 Report issues to <https://github.com/lunaryorn/git-gone>.",
         );
 
-    let matches = app.get_matches();
-    let verbose = matches.is_present("verbose");
+    let mut matches = app.get_matches();
+    let verbose = matches.remove_one::<bool>("verbose").unwrap();
 
     let repo = Repository::open_from_env()?;
 
-    if matches.is_present("fetch") {
-        let mut command = Command::new("git");
+    if matches.subcommand_name().unwrap() == "fetch" {
+        let mut command = std::process::Command::new("git");
         command.arg("fetch").arg("--prune").arg("--all");
         if !verbose {
             command.arg("--quiet");
