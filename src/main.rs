@@ -79,23 +79,45 @@ fn prune_gone_branches(repo: &Repository) -> Result<(), Error> {
     Ok(())
 }
 
+fn fetch_branches(verbose: bool) -> Result<(), std::io::Error> {
+    let mut command = std::process::Command::new("git");
+    command.arg("fetch").arg("--prune").arg("--all");
+    if !verbose {
+        command.arg("--quiet");
+    }
+    command
+        .spawn()
+        .and_then(|mut c| c.wait())
+        .and_then(|status| {
+            if status.success() {
+                Ok(())
+            } else {
+                use std::io::{Error, ErrorKind};
+                Err(Error::new(
+                    ErrorKind::Other,
+                    "git fetch --prune --all failed",
+                ))
+            }
+        })
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     use clap::*;
     let app = command!()
-        .arg(
-            Arg::new("verbose")
-                .short('v')
-                .long("verbose")
-                .display_order(2)
-                .help("Prints detailed progress when fetching")
-                .action(clap::ArgAction::SetTrue),
-        )
         .arg(
             Arg::new("fetch")
                 .short('f')
                 .long("fetch")
                 .display_order(1)
                 .help("Fetches and prunes all remotes first")
+                .action(clap::ArgAction::SetTrue),
+        )
+        .arg(
+            Arg::new("verbose")
+                .short('v')
+                .long("verbose")
+                .display_order(2)
+                .help("Prints detailed progress when fetching")
                 .action(clap::ArgAction::SetTrue),
         )
         .subcommand(
@@ -127,37 +149,20 @@ Licensed under the Apache License, Version 2.0
 Report issues to <https://github.com/lunaryorn/git-gone>.",
         );
 
-    let mut matches = app.get_matches();
-    let verbose = matches.remove_one::<bool>("verbose").unwrap();
-
     let repo = Repository::open_from_env()?;
 
-    if matches.subcommand_name().unwrap() == "fetch" {
-        let mut command = std::process::Command::new("git");
-        command.arg("fetch").arg("--prune").arg("--all");
-        if !verbose {
-            command.arg("--quiet");
-        }
-        command
-            .spawn()
-            .and_then(|mut c| c.wait())
-            .and_then(|status| {
-                if status.success() {
-                    Ok(())
-                } else {
-                    use std::io::{Error, ErrorKind};
-                    Err(Error::new(
-                        ErrorKind::Other,
-                        "git fetch --prune --all failed",
-                    ))
-                }
-            })?;
+    let matches = app.get_matches();
+
+    let verbose = matches.get_flag("verbose");
+    let fetch = matches.get_flag("fetch");
+    if fetch {
+        fetch_branches(verbose)?;
     }
 
     match matches.subcommand_name().unwrap_or("list") {
         "list" => list_gone_branches(&repo)?,
         "prune" => prune_gone_branches(&repo)?,
-        name => panic!("Unexpected subcommand: {}", name),
+        _ => unreachable!(),
     }
 
     Ok(())
