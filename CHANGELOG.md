@@ -6,6 +6,8 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
+## [0.4.1] – 2022-09-28
+
 ### Fixed
 - Correctly parse command line arguments (see [CB-14]).
 
@@ -109,6 +111,7 @@ Initial release.
 [0.3.5]: https://codeberg.org/flausch/git-gone/compare/v0.3.4...v0.3.5
 [0.3.6]: https://codeberg.org/flausch/git-gone/compare/v0.3.5...v0.3.6
 [0.3.7]: https://codeberg.org/flausch/git-gone/compare/v0.3.6...v0.3.7
-[Unreleased]: https://codeberg.org/flausch/git-gone/compare/v0.4.0...HEAD
+[Unreleased]: https://codeberg.org/flausch/git-gone/compare/v0.4.1...HEAD
+[0.4.1]: https://codeberg.org/flausch/git-gone/compare/v0.4.0...v0.4.1
 [0.4.0]: https://codeberg.org/flausch/git-gone/compare/v0.3.8...v0.4.0
 [0.3.8]: https://codeberg.org/flausch/git-gone/compare/v0.3.7...v0.3.8

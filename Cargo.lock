@@ -77,7 +77,7 @@ dependencies = [
 
 [[package]]
 name = "git-gone"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "clap",
  "git2",
