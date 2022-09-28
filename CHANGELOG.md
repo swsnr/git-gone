@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
+### Fixed
+- Correctly parse command line arguments (see [CB-14]).
+
+[CB-14]: https://codeberg.org/flausch/git-gone/issues/14
+
 ## [0.4.0] – 2022-09-18
 
 ### Changed
