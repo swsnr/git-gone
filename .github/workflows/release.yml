@@ -1,0 +1,112 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build-binaries:
+    runs-on: '${{ matrix.os }}'
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest, windows-latest]
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-musl
+          - os: macOS-latest
+            target: x86_64-apple-darwin
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+          target: ${{ matrix.target }}
+      - name: Install musl
+        run: sudo apt-get install musl-tools
+        if: contains(matrix.target, 'linux-musl')
+      - name: cargo build --release
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release --target ${{ matrix.target }} --verbose
+      - name: strip
+        run: strip 'target/${{ matrix.target }}/release/git-gone'
+        if: "!contains(matrix.target, 'windows')"
+      - name: Get version
+        id: version
+        shell: bash
+        run: |
+          VERSION="$(cargo pkgid | cut -d'#' -f2 | cut -d: -f2)"
+          echo "::set-output name=version::$VERSION"
+          echo "::set-output name=tag::v$VERSION"
+      - name: Build package
+        id: package
+        shell: bash
+        run: |
+          ARCHIVE_NAME="git-gone-${{ steps.version.outputs.tag }}-${{ matrix.target }}"
+          if [[ '${{ matrix.target }}' == *windows* ]]; then
+            ARCHIVE_FILE="${ARCHIVE_NAME}.zip"
+            mv LICENSE LICENSE.txt
+            7z a "${ARCHIVE_FILE}" "./target/${{ matrix.target }}/release/git-gone.exe" ./git-gone.1.adoc ./CHANGELOG.md ./LICENSE.txt
+            echo ::set-output "name=file::${ARCHIVE_FILE}"
+            echo ::set-output "name=name::${ARCHIVE_NAME}.zip"
+          else
+            ARCHIVE_FILE="${ARCHIVE_NAME}.tar.gz"
+            mkdir "/tmp/${ARCHIVE_NAME}"
+            cp git-gone.1.adoc git-gone.1 CHANGELOG.md LICENSE "target/${{ matrix.target }}/release/git-gone" "/tmp/${ARCHIVE_NAME}"
+            tar -czf "${PWD}/${ARCHIVE_FILE}" -C /tmp/ "${ARCHIVE_NAME}"
+            echo ::set-output "name=file::${ARCHIVE_FILE}"
+            echo ::set-output "name=name::${ARCHIVE_NAME}.tar.gz"
+          fi
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ steps.package.outputs.name }}
+          path: ${{ steps.package.outputs.file }}
+
+  create-release:
+    runs-on: ubuntu-latest
+    needs: build-binaries
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: ./binaries
+      - name: Compute checksums
+        shell: bash
+        run: |
+          for directory in *; do (
+            cd "$directory"; shopt -s nullglob; b2sum *.zip *.tar.gz >> ../B2SUMS.txt; sha512sum *.zip *.tar.gz >> ../SHA512SUM.txt
+          ); done
+        working-directory: binaries
+      - name: Get version
+        id: version
+        shell: bash
+        run: |
+          VERSION="$(cargo pkgid | cut -d'#' -f2 | cut -d: -f2)"
+          echo "::set-output name=version::$VERSION"
+      - name: Extract changelog
+        shell: bash
+        run: |
+          awk -v r='${{ steps.version.outputs.version }}' \
+            '/^\[[^]]*\]/{print $0}/^## \[[0-9]/ && match($0, /\[[0-9][^]]*\]/){if (r == substr($0, RSTART+1, RLENGTH-2)) { p=1; next } else { p=0 } }p' \
+            CHANGELOG.md > ./CHANGELOG-release.md
+          cat CHANGELOG-release.md
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: v${{ steps.version.outputs.version }}
+          body_path: ./CHANGELOG-release.md
+          files: |
+            ./binaries/**/*.zip
+            ./binaries/**/*.tar.gz
+            ./binaries/B2SUMS.txt
+            ./binaries/SHA512SUM.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
