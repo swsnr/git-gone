@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
+### Changed
+
+- Use Github again and provide release binaries.
+
 ## [0.4.1] – 2022-09-28
 
 ### Fixed
@@ -31,7 +35,7 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 - Include source files in crate distributions; fixes building from source with
   `cargo install` (see [GH-12]).
 
-[GH-12]: https://codeberg.org/flausch/git-gone/issues/12
+[GH-12]: https://github.com/lunaryorn/git-gone/issues/12
 
 ## [0.3.6] – 2020-06-14
 ### Changed
@@ -63,7 +67,7 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 ### Changed
 * Update git2 dependency to 0.13.
 
-[GH-10]: https://codeberg.org/flausch/git-gone/pulls/10
+[GH-10]: https://github.com/lunaryorn/git-gone/pull/10
 
 ## [0.3.0] – 2019-12-18
 ### Changed
@@ -71,14 +75,14 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
   mechanisms for authentication (see [GH-5]) and the standard pretty output.
   Hence `git gone -f` now requires `git` in `$PATH`.
 
-[GH-5]: https://codeberg.org/flausch/git-gone/issues/5
+[GH-5]: https://github.com/lunaryorn/git-gone/issues/5
 
 ## [0.2.0] – 2019-11-30
 ### Fixed
 * Properly detect gone branches by looking at branches that used to have an
   upstream (see [GH-8]).
 
-[GH-8]: https://codeberg.org/flausch/git-gone/pulls/8
+[GH-8]: https://github.com/lunaryorn/git-gone/pull/8
 
 ## [0.1.2] – 2019-01-13
 ### Added
@@ -99,19 +103,19 @@ Initial release.
 * Add `prune` subcommand to prune gone branches.
 * Add `--fetch` flag to fetch all remotes before looking for gone branches.
 
-[0.1.0]: https://codeberg.org/flausch/git-gone/releases/tag/v0.1.0
-[0.1.1]: https://codeberg.org/flausch/git-gone/compare/v0.1.0...v0.1.1
-[0.1.2]: https://codeberg.org/flausch/git-gone/compare/v0.1.1...v0.1.2
-[0.2.0]: https://codeberg.org/flausch/git-gone/compare/v0.1.2...v0.2.0
-[0.3.0]: https://codeberg.org/flausch/git-gone/compare/v0.2.0...v0.3.0
-[0.3.1]: https://codeberg.org/flausch/git-gone/compare/v0.3.0...v0.3.1
-[0.3.2]: https://codeberg.org/flausch/git-gone/compare/v0.3.1...v0.3.2
-[0.3.3]: https://codeberg.org/flausch/git-gone/compare/v0.3.2...v0.3.3
-[0.3.4]: https://codeberg.org/flausch/git-gone/compare/v0.3.3...v0.3.4
-[0.3.5]: https://codeberg.org/flausch/git-gone/compare/v0.3.4...v0.3.5
-[0.3.6]: https://codeberg.org/flausch/git-gone/compare/v0.3.5...v0.3.6
-[0.3.7]: https://codeberg.org/flausch/git-gone/compare/v0.3.6...v0.3.7
-[Unreleased]: https://codeberg.org/flausch/git-gone/compare/v0.4.1...HEAD
-[0.4.1]: https://codeberg.org/flausch/git-gone/compare/v0.4.0...v0.4.1
-[0.4.0]: https://codeberg.org/flausch/git-gone/compare/v0.3.8...v0.4.0
-[0.3.8]: https://codeberg.org/flausch/git-gone/compare/v0.3.7...v0.3.8
+[Unreleased]: https://github.com/lunaryorn/git-gone/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/lunaryorn/git-gone/compare/v0.4.0...v0.4.1
+[0.4.0]: https://github.com/lunaryorn/git-gone/compare/v0.3.8...v0.4.0
+[0.3.8]: https://github.com/lunaryorn/git-gone/compare/v0.3.7...v0.3.8
+[0.3.7]: https://github.com/lunaryorn/git-gone/compare/v0.3.6...v0.3.7
+[0.3.6]: https://github.com/lunaryorn/git-gone/compare/v0.3.5...v0.3.6
+[0.3.5]: https://github.com/lunaryorn/git-gone/compare/v0.3.4...v0.3.5
+[0.3.4]: https://github.com/lunaryorn/git-gone/compare/v0.3.3...v0.3.4
+[0.3.3]: https://github.com/lunaryorn/git-gone/compare/v0.3.2...v0.3.3
+[0.3.2]: https://github.com/lunaryorn/git-gone/compare/v0.3.1...v0.3.2
+[0.3.1]: https://github.com/lunaryorn/git-gone/compare/v0.3.0...v0.3.1
+[0.3.0]: https://github.com/lunaryorn/git-gone/compare/v0.2.0...v0.3.0
+[0.2.0]: https://github.com/lunaryorn/git-gone/compare/v0.1.2...v0.2.0
+[0.1.2]: https://github.com/lunaryorn/git-gone/compare/v0.1.1...v0.1.2
+[0.1.1]: https://github.com/lunaryorn/git-gone/compare/v0.1.0...v0.1.1
+[0.1.0]: https://github.com/lunaryorn/git-gone/releases/tag/v0.1.0
