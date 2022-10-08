@@ -20,11 +20,7 @@ include = [
 ]
 
 [dependencies]
-clap = { version = "3.2.20", default-features = false, features = [
-    "std",
-    "cargo",
-    "deprecated",
-] }
+clap = { version = "4.0.10", features = ["cargo"] }
 
 [dependencies.git2]
 version = "0.15.0"
