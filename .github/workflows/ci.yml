@@ -24,7 +24,7 @@ jobs:
           args: --all-targets
 
   doc:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-ruby@v1
@@ -36,6 +36,12 @@ jobs:
         run: MANWIDTH=80 man -l git-gone.1 > README
       - name: Check changes
         run: git --no-pager diff --exit-code -- git-gone.1 README
+
+  cargo-deny:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: EmbarkStudios/cargo-deny-action@v1
 
   test:
     strategy:
