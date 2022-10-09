@@ -6,6 +6,8 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
+## [0.4.2] – 2022-10-09
+
 ### Changed
 
 - Use Github again and provide release binaries.
@@ -104,7 +106,8 @@ Initial release.
 * Add `prune` subcommand to prune gone branches.
 * Add `--fetch` flag to fetch all remotes before looking for gone branches.
 
-[Unreleased]: https://github.com/lunaryorn/git-gone/compare/v0.4.1...HEAD
+[Unreleased]: https://github.com/lunaryorn/git-gone/compare/v0.4.2...HEAD
+[0.4.2]: https://github.com/lunaryorn/git-gone/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/lunaryorn/git-gone/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/lunaryorn/git-gone/compare/v0.3.8...v0.4.0
 [0.3.8]: https://github.com/lunaryorn/git-gone/compare/v0.3.7...v0.3.8
