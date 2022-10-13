@@ -1,3 +1,4 @@
+version: 2
 updates:
   # Check for updates of crates and actions every month
   - package-ecosystem: cargo
