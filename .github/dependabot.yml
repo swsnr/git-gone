@@ -3,8 +3,8 @@ updates:
   - package-ecosystem: cargo
     directory: "/"
     schedule:
-      interval: montly
+      interval: monthly
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: montly
+      interval: monthly
