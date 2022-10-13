@@ -6,41 +6,27 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@stable
         with:
-          profile: minimal
-          toolchain: stable
-          override: true
           components: rustfmt, clippy
-      - name: fmt --check
-        uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: -- --check
-      - uses: actions-rs/clippy-check@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          args: --all-targets
+      - run: cargo fmt --check
+      - run: cargo clippy --all-targets
 
   doc:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-ruby@v1
-      - name: Install asciidoctor
-        run: gem install asciidoctor
-      - name: Build manpage
-        run: asciidoctor -b manpage -a reproducible git-gone.1.adoc
-      - name: Build README
-        run: MANWIDTH=80 man -l git-gone.1 > README
-      - name: Check changes
-        run: git --no-pager diff --exit-code -- git-gone.1 README
+      - run: gem install asciidoctor
+      - run: asciidoctor -b manpage -a reproducible git-gone.1.adoc
+      - run: MANWIDTH=80 man -l git-gone.1 > README
+      - run: git --no-pager diff --exit-code -- git-gone.1 README
 
   cargo-deny:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: EmbarkStudios/cargo-deny-action@v1
 
   test:
@@ -67,22 +53,13 @@ jobs:
             os: windows-latest
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
        # Install musl tools for musl target
       - name: Install musl tools
         run: sudo apt-get install musl-tools
         if: "contains(matrix.target, 'musl')"
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@stable
         with:
-          profile: minimal
-          toolchain: stable
-          override: true
-          target: ${{ matrix.target }}
-      - uses: actions-rs/cargo@v1
-        with:
-          command: build
-          args: --all-targets --target ${{ matrix.target }}
-      - uses: actions-rs/cargo@v1
-        with:
-          command: test
-          args: --target ${{ matrix.target }}
+          targets: ${{ matrix.target }}
+      - run: cargo build --all-targets --target ${{ matrix.target }}
+      - run: cargo test --target ${{ matrix.target }}
