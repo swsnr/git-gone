@@ -18,3 +18,7 @@ copyleft = "deny"
 allow-osi-fsf-free = "neither"
 default = "deny"
 confidence-threshold = 0.8
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
