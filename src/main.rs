@@ -101,37 +101,8 @@ fn fetch_branches(verbose: bool) -> Result<(), std::io::Error> {
         })
 }
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    use clap::*;
-    let app = command!()
-        .arg(
-            Arg::new("fetch")
-                .short('f')
-                .long("fetch")
-                .display_order(1)
-                .help("Fetches and prunes all remotes first")
-                .action(clap::ArgAction::SetTrue),
-        )
-        .arg(
-            Arg::new("verbose")
-                .short('v')
-                .long("verbose")
-                .display_order(2)
-                .help("Prints detailed progress when fetching")
-                .action(clap::ArgAction::SetTrue),
-        )
-        .subcommand(
-            Command::new("list")
-                .display_order(1)
-                .about("Lists gone branches (default)"),
-        )
-        .subcommand(
-            Command::new("prune")
-                .display_order(2)
-                .about("Prune gone branches"),
-        )
-        .after_help(
-            "\
+fn after_help() -> &'static str {
+    "\
 A \"gone\" branch is a local Git branch whose upstream branch no longer exist.
 This frequently occurs in a pull request workflow:
 
@@ -146,23 +117,43 @@ git gone can list these branches and also prune them from your clone.
 
 Copyright (C) 2018–2020 Sebastian Wiesner
 Licensed under the Apache License, Version 2.0
-Report issues to <https://github.com/lunaryorn/git-gone>.",
-        );
+Report issues to <https://github.com/lunaryorn/git-gone>."
+}
 
+#[derive(Debug, clap::Parser)]
+#[command(author, version, about, after_help=after_help())]
+struct Args {
+    /// Fetch and prune all remotes first.
+    #[arg(short, long, global = true)]
+    fetch: bool,
+    /// Print detailed progress when fetching
+    #[arg(short, long, global = true)]
+    verbose: bool,
+    /// The command.  Defaults to "list".
+    #[command(subcommand)]
+    command: Option<Command>,
+}
+
+#[derive(Debug, clap::Subcommand)]
+enum Command {
+    /// List all gone branches.  Default.
+    List,
+    /// Delete all gone branches.
+    Prune,
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    use clap::Parser;
+    let args = Args::parse();
     let repo = Repository::open_from_env()?;
 
-    let matches = app.get_matches();
-
-    let verbose = matches.get_flag("verbose");
-    let fetch = matches.get_flag("fetch");
-    if fetch {
-        fetch_branches(verbose)?;
+    if args.fetch {
+        fetch_branches(args.verbose)?;
     }
 
-    match matches.subcommand_name().unwrap_or("list") {
-        "list" => list_gone_branches(&repo)?,
-        "prune" => prune_gone_branches(&repo)?,
-        _ => unreachable!(),
+    match args.command.unwrap_or(Command::List) {
+        Command::List => list_gone_branches(&repo)?,
+        Command::Prune => prune_gone_branches(&repo)?,
     }
 
     Ok(())
