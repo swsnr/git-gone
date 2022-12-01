@@ -40,7 +40,7 @@ EXIT STATUS
        0 on success, non-zero otherwise.
 
 BUGS
-       Please report bugs to https://github.com/lunaryorn/git-gone/issues/new.
+       Please report bugs to https://github.com/swsnr/git-gone/issues/new.
 
 SEE ALSO
        git(1)

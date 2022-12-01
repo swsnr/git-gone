@@ -5,6 +5,6 @@ pre-release-replacements = [
     # Update the changelog
     { file = "CHANGELOG.md", search = "## \\[Unreleased\\]", replace = "## [Unreleased]\n\n## [{{version}}] – {{date}}", exactly = 1 },
     { file = "CHANGELOG.md", search = "HEAD", replace = "{{tag_name}}", exactly = 1 },
-    { file = "CHANGELOG.md", search = "\\[Unreleased\\]: ", replace = "[Unreleased]: https://github.com/lunaryorn/git-gone/compare/{{tag_name}}...HEAD\n[{{version}}]: ", exactly = 1 },
+    { file = "CHANGELOG.md", search = "\\[Unreleased\\]: ", replace = "[Unreleased]: https://github.com/swsnr/git-gone/compare/{{tag_name}}...HEAD\n[{{version}}]: ", exactly = 1 },
 ]
 pre-release-hook = ["./scripts/prerelease-update-manpage"]
