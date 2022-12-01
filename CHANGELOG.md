@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
+### Changed
+- Update Github repository URL to <https://github.com/swsnr/git-gone>.
+- Update dependencies.
+
 ## [0.4.2] – 2022-10-09
 
 ### Changed
