@@ -20,7 +20,7 @@ include = [
 ]
 
 [dependencies]
-clap = { version = "4.0.14", default-features = false, features = [
+clap = { version = "4.0.29", default-features = false, features = [
     "std",
     # Auto-generate help and usage info
     "help",
