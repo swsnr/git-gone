@@ -1,10 +1,8 @@
 version: 2
 updates:
-  # Check for updates of crates and actions every month
-  - package-ecosystem: cargo
-    directory: "/"
-    schedule:
-      interval: monthly
+  # Check for updates of crates and actions every month.  We don't check for
+  # Rust updates because it's a nuisance to get so many pull requests, and we
+  # can just cargo update once in a while.
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
