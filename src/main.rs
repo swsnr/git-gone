@@ -59,7 +59,7 @@ fn find_gone_branches(repo: &Repository) -> Result<impl Iterator<Item = Branch<'
 fn list_gone_branches(repo: &Repository) -> Result<(), Error> {
     for branch in find_gone_branches(repo)? {
         let name = String::from_utf8_lossy(branch.name_bytes()?);
-        println!("{}", name);
+        println!("{name}");
     }
     Ok(())
 }
@@ -71,10 +71,7 @@ fn prune_gone_branches(repo: &Repository) -> Result<(), Error> {
         // Take a copy of the name cow because "delete()" borrows mutable
         let name = String::from_utf8_lossy(branch.name_bytes()?).to_string();
         branch.delete()?;
-        println!(
-            "Deleted {0} (restore with `git checkout -b {0} {1}`)",
-            name, oid
-        );
+        println!("Deleted {name} (restore with `git checkout -b {name} {oid}`)");
     }
     Ok(())
 }
