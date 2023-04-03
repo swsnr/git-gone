@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 ## [Unreleased]
 
 ### Changed
-- Update dependencies.
+- Update git2 to support latest libgit2.
 
 ## [0.4.3] – 2022-12-01
 

@@ -20,7 +20,7 @@ include = [
 ]
 
 [dependencies]
-clap = { version = "4.0.32", default-features = false, features = [
+clap = { version = "4.2.1", default-features = false, features = [
     "std",
     # Auto-generate help and usage info
     "help",
@@ -31,7 +31,7 @@ clap = { version = "4.0.32", default-features = false, features = [
 ] }
 
 [dependencies.git2]
-version = "0.16.1"
+version = "0.17.0"
 # Disable all features of git2; we only use a small subset of the library and do not need any of these.
 # Specifically this also disables SSL and SSH support and thus removes library dependencies, which permits
 # a static musl build.
