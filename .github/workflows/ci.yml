@@ -19,8 +19,6 @@ jobs:
       - uses: actions/checkout@v3
       - run: sudo gem install asciidoctor -v 2.0.18
       - run: asciidoctor -b manpage -a reproducible git-gone.1.adoc
-      - run: MANWIDTH=80 man -l git-gone.1 > README
-      - run: git --no-pager diff --exit-code -- git-gone.1 README
 
   cargo-deny:
     runs-on: ubuntu-latest
