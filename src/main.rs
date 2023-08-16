@@ -70,8 +70,14 @@ fn prune_gone_branches(repo: &Repository) -> Result<(), Error> {
         let oid = branch.get().peel_to_commit()?.id();
         // Take a copy of the name cow because "delete()" borrows mutable
         let name = String::from_utf8_lossy(branch.name_bytes()?).to_string();
-        branch.delete()?;
-        println!("Deleted {name} (restore with `git checkout -b {name} {oid}`)");
+        match branch.delete() {
+            Ok(()) => {
+                println!("Deleted {name} (restore with `git checkout -b {name} {oid}`)");
+            }
+            Err(e) => {
+                eprintln!("Skipped deleting {name} due to {e:?}");
+            }
+        };
     }
     Ok(())
 }
