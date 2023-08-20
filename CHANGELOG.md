@@ -7,8 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 ## [Unreleased]
 
 ### Changed
-- Don't error/short-circuit when failing to delete a branch. See [GH-22] and
-  [GH-23].
+- Don't error/short-circuit when failing to delete a branch (see [GH-22] and [GH-23]).
 
 [GH-22]: https://github.com/swsnr/git-gone/issues/22
 [GH-23]: https://github.com/swsnr/git-gone/pull/23
