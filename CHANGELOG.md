@@ -6,6 +6,8 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
+## [1.0.0] – 2023-08-20
+
 ### Changed
 - Don't error/short-circuit when failing to delete a branch (see [GH-22] and [GH-23]).
 
@@ -123,7 +125,8 @@ Initial release.
 * Add `prune` subcommand to prune gone branches.
 * Add `--fetch` flag to fetch all remotes before looking for gone branches.
 
-[Unreleased]: https://github.com/swsnr/git-gone/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/swsnr/git-gone/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/swsnr/git-gone/compare/v0.5.0...v1.0.0
 [0.5.0]: https://github.com/swsnr/git-gone/compare/v0.4.3...v0.5.0
 [0.4.3]: https://github.com/swsnr/git-gone/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/swsnr/git-gone/compare/v0.4.1...v0.4.2
