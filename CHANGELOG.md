@@ -6,6 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
+### Removed
+- Remove `--fetch`; run `git fetch --prune` explicitly before `git prune`.
+
 ## [1.0.0] – 2023-08-20
 
 ### Changed
