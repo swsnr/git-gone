@@ -29,9 +29,9 @@ clap = { version = "4.2.1", default-features = false, features = [
     "error-context",
     "derive",
 ] }
+gix = { version = "0.53.1", default-features = false }
 
 [dependencies.git2]
-version = "0.17.0"
 # Disable all features of git2; we only use a small subset of the library and do not need any of these.
 # Specifically this also disables SSL and SSH support and thus removes library dependencies, which permits
 # a static musl build.

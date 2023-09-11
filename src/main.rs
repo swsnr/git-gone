@@ -117,10 +117,28 @@ enum Command {
     Prune,
 }
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
+fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     use clap::Parser;
     let args = Args::parse();
     let repo = Repository::open_from_env()?;
+
+    let gix_repo =
+        gix::ThreadSafeRepository::discover_with_environment_overrides(std::env::current_dir()?)?
+            .to_thread_local();
+
+    for branch_or_error in gix_repo.references()?.local_branches()? {
+        let branch = branch_or_error?;
+        let name = branch.name().shorten();
+        let remote_name = branch.remote_name(gix::remote::Direction::Fetch);
+        let remote_ref = gix_repo.branch_remote_ref(name);
+        // let remote_name = branch.remote(gix::remote::Direction::Fetch);
+        println!(
+            "TEST: {}, remote: {:?}, tracking: {:?}",
+            branch.name().shorten(),
+            remote_name,
+            remote_ref
+        );
+    }
 
     match args.command.unwrap_or(Command::List) {
         Command::List => list_gone_branches(&repo)?,
