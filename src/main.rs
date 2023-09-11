@@ -82,28 +82,6 @@ fn prune_gone_branches(repo: &Repository) -> Result<(), Error> {
     Ok(())
 }
 
-fn fetch_branches(verbose: bool) -> Result<(), std::io::Error> {
-    let mut command = std::process::Command::new("git");
-    command.arg("fetch").arg("--prune").arg("--all");
-    if !verbose {
-        command.arg("--quiet");
-    }
-    command
-        .spawn()
-        .and_then(|mut c| c.wait())
-        .and_then(|status| {
-            if status.success() {
-                Ok(())
-            } else {
-                use std::io::{Error, ErrorKind};
-                Err(Error::new(
-                    ErrorKind::Other,
-                    "git fetch --prune --all failed",
-                ))
-            }
-        })
-}
-
 fn after_help() -> &'static str {
     "\
 A \"gone\" branch is a local Git branch whose upstream branch no longer exist.
@@ -126,12 +104,6 @@ Report issues to <https://github.com/swsnr/git-gone>."
 #[derive(Debug, clap::Parser)]
 #[command(author, version, about, after_help=after_help())]
 struct Args {
-    /// Fetch and prune all remotes first.
-    #[arg(short, long, global = true)]
-    fetch: bool,
-    /// Print detailed progress when fetching
-    #[arg(short, long, global = true)]
-    verbose: bool,
     /// The command.  Defaults to "list".
     #[command(subcommand)]
     command: Option<Command>,
@@ -149,10 +121,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     use clap::Parser;
     let args = Args::parse();
     let repo = Repository::open_from_env()?;
-
-    if args.fetch {
-        fetch_branches(args.verbose)?;
-    }
 
     match args.command.unwrap_or(Command::List) {
         Command::List => list_gone_branches(&repo)?,
