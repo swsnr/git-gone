@@ -6,6 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
+### Changed
+- Update all dependencies, to address [GHSA-22q8-ghmq-63vf](https://github.com/swsnr/git-gone/security/dependabot/3)
+
 ### Removed
 - Remove `--fetch`; run `git fetch --prune` explicitly before `git prune`.
 
