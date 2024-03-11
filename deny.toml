@@ -1,24 +1,14 @@
+[graph]
 targets = []
 
 [advisories]
-db-path = "~/.cargo/advisory-db"
-db-urls = ["https://github.com/rustsec/advisory-db"]
-vulnerability = "deny"
-unmaintained = "deny"
-yanked = "deny"
-notice = "warn"
+version = 2
 ignore = []
 
 [licenses]
-unlicensed = "deny"
+version = 2
 allow = ["MIT", "Apache-2.0"]
-deny = []
 exceptions = [{ allow = ["Unicode-DFS-2016"], name = "unicode-ident" }]
-# Deny all copyleft license except the ones above.
-copyleft = "deny"
-allow-osi-fsf-free = "neither"
-default = "deny"
-confidence-threshold = 0.8
 
 [sources]
 unknown-registry = "deny"
