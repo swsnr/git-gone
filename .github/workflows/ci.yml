@@ -23,8 +23,24 @@ jobs:
   cargo-deny:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: EmbarkStudios/cargo-deny-action@v1
+      - uses: actions/checkout@v4
+      - uses: EmbarkStudios/cargo-deny-action@v1
+
+  cargo-vet:
+    name: Vet Dependencies
+    runs-on: ubuntu-latest
+    env:
+      CARGO_VET_VERSION: "0.9.1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/cache@v2
+        with:
+          path: ${{ runner.tool_cache }}/cargo-vet
+          key: cargo-vet-bin-${{ env.CARGO_VET_VERSION }}
+      - run: echo "${{ runner.tool_cache }}/cargo-vet/bin" >> $GITHUB_PATH
+      - run: cargo install --root ${{ runner.tool_cache }}/cargo-vet --version ${{ env.CARGO_VET_VERSION }} cargo-vet
+      - run: cargo vet
 
   test:
     strategy:
@@ -51,7 +67,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-       # Install musl tools for musl target
+        # Install musl tools for musl target
       - name: Install musl tools
         run: sudo apt-get install musl-tools
         if: "contains(matrix.target, 'musl')"
