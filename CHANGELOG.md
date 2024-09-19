@@ -6,6 +6,8 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
+## [1.1.1] – 2024-09-19
+
 ### Changed
 - Update dependencies.
 
@@ -136,7 +138,8 @@ Initial release.
 * Add `prune` subcommand to prune gone branches.
 * Add `--fetch` flag to fetch all remotes before looking for gone branches.
 
-[Unreleased]: https://github.com/swsnr/git-gone/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/swsnr/git-gone/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/swsnr/git-gone/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/swsnr/git-gone/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/swsnr/git-gone/compare/v0.5.0...v1.0.0
 [0.5.0]: https://github.com/swsnr/git-gone/compare/v0.4.3...v0.5.0
