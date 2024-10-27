@@ -6,123 +6,124 @@ version = "0.10"
 
 [policy.git-gone]
 audit-as-crates-io = true
+criteria = "safe-to-run"
 
 [[exemptions.anstyle]]
 version = "1.0.8"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.bitflags]]
 version = "2.6.0"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.cc]]
 version = "1.1.21"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.clap]]
 version = "4.5.17"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.clap_builder]]
 version = "4.5.17"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.clap_derive]]
 version = "4.5.13"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.clap_lex]]
 version = "0.7.2"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.form_urlencoded]]
 version = "1.2.1"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.git-gone]]
 version = "1.1.1"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.git2]]
 version = "0.19.0"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.heck]]
 version = "0.5.0"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.idna]]
 version = "0.5.0"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.jobserver]]
 version = "0.1.32"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.libc]]
 version = "0.2.158"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.libgit2-sys]]
 version = "0.17.0+1.8.1"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.libz-sys]]
 version = "1.1.20"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.log]]
 version = "0.4.22"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.percent-encoding]]
 version = "2.3.1"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.pkg-config]]
 version = "0.3.30"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.proc-macro2]]
 version = "1.0.86"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.quote]]
 version = "1.0.37"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.shlex]]
 version = "1.3.0"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.syn]]
 version = "2.0.77"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.tinyvec]]
 version = "1.8.0"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.tinyvec_macros]]
 version = "0.1.1"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.unicode-bidi]]
 version = "0.3.15"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.unicode-ident]]
 version = "1.0.13"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.unicode-normalization]]
 version = "0.1.24"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.url]]
 version = "2.5.2"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
 
 [[exemptions.vcpkg]]
 version = "0.2.15"
-criteria = "safe-to-deploy"
+criteria = "safe-to-run"
