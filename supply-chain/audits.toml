@@ -7,6 +7,12 @@ criteria = "safe-to-deploy"
 delta = "0.3.29 -> 0.3.30"
 notes = "This change just adds documentation."
 
+[[audits.tinyvec_macros]]
+who = "Sebastian Wiesner <sebastian@swsnr.de>"
+criteria = "safe-to-deploy"
+delta = "0.1.0 -> 0.1.1"
+notes = "Explicitly forbids unsafe code now; remaining changes is just new license files"
+
 [[trusted.cc]]
 criteria = "safe-to-run"
 user-id = 2915
