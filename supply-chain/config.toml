@@ -17,15 +17,11 @@ url = "https://raw.githubusercontent.com/google/supply-chain/main/audits.toml"
 url = "https://raw.githubusercontent.com/mozilla/supply-chain/main/audits.toml"
 
 [policy.git-gone]
-audit-as-crates-io = true
+audit-as-crates-io = false
 criteria = "safe-to-run"
 
 [[exemptions.cc]]
 version = "1.1.21"
-criteria = "safe-to-run"
-
-[[exemptions.git-gone]]
-version = "1.1.1"
 criteria = "safe-to-run"
 
 [[exemptions.git2]]
