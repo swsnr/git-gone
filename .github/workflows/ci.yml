@@ -71,7 +71,7 @@ jobs:
         # Install musl tools for musl target
       - name: Install musl tools
         run: sudo apt-get install musl-tools
-        if: "contains(matrix.target, 'musl')"
+        if: contains(matrix.target, 'musl')
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: ${{ matrix.target }}
