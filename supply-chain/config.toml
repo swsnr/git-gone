@@ -24,20 +24,12 @@ criteria = "safe-to-run"
 version = "1.1.21"
 criteria = "safe-to-run"
 
-[[exemptions.clap_derive]]
-version = "4.5.13"
-criteria = "safe-to-run"
-
 [[exemptions.git-gone]]
 version = "1.1.1"
 criteria = "safe-to-run"
 
 [[exemptions.git2]]
 version = "0.19.0"
-criteria = "safe-to-run"
-
-[[exemptions.jobserver]]
-version = "0.1.32"
 criteria = "safe-to-run"
 
 [[exemptions.libgit2-sys]]

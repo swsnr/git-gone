@@ -2,3 +2,45 @@
 # cargo-vet audits file
 
 [audits]
+
+[[trusted.cc]]
+criteria = "safe-to-run"
+user-id = 2915
+start = "2024-02-20"
+end = "2025-10-27"
+notes = "Trusted by Mozilla and Bytecode Alliance"
+
+[[trusted.clap_derive]]
+criteria = "safe-to-run"
+user-id = 6743 # Ed Page (epage)
+start = "2021-12-08"
+end = "2025-10-27"
+notes = "Trusted by Mozilla and Bytecode Alliance"
+
+[[trusted.git2]]
+criteria = "safe-to-run"
+user-id = 4333
+start = "2020-08-19"
+end = "2025-10-27"
+notes = "Trusted by Mozilla and Bytecode Alliance"
+
+[[trusted.jobserver]]
+criteria = "safe-to-run"
+user-id = 1 # Alex Crichton (alexcrichton)
+start = "2019-03-15"
+end = "2025-10-27"
+notes = "Trusted by Mozilla and Bytecode Alliance"
+
+[[trusted.libgit2-sys]]
+criteria = "safe-to-run"
+user-id = 4333
+start = "2020-08-19"
+end = "2025-10-27"
+notes = "Trusted by Mozilla and Bytecode Alliance"
+
+[[trusted.libz-sys]]
+criteria = "safe-to-run"
+user-id = 4333
+start = "2020-08-14"
+end = "2025-10-27"
+notes = "Trusted by Mozilla and Bytecode Alliance"
