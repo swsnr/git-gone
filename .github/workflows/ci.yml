@@ -12,19 +12,15 @@ jobs:
           components: rustfmt, clippy
       - run: cargo fmt --check
       - run: cargo clippy --all-targets
+      - uses: EmbarkStudios/cargo-deny-action@v2
 
   doc:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: sudo gem install asciidoctor -v 2.0.18
-      - run: asciidoctor -b manpage -a reproducible git-gone.1.adoc
-
-  cargo-deny:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: EmbarkStudios/cargo-deny-action@v2
+      - uses: docker://asciidoctor/docker-asciidoctor
+        with:
+          args: -b manpage -a reproducible git-gone.1.adoc
 
   test:
     strategy:
