@@ -12,9 +12,18 @@
 // License for the specific language governing permissions and limitations under
 // the License.
 
-#![deny(warnings, clippy::all)]
+#![deny(warnings, clippy::all, clippy::pedantic,
+    // Guard against left-over debugging output
+    clippy::dbg_macro,
+    clippy::unimplemented,
+    clippy::use_debug,
+    clippy::todo,
+    // Do not carelessly ignore errors
+    clippy::let_underscore_must_use,
+    clippy::let_underscore_untyped,
+)]
 
-use git2::*;
+use git2::{Branch, BranchType, Error, ErrorCode, Repository};
 
 /// Whether a branch has an upstream.
 ///
@@ -26,7 +35,7 @@ fn has_upstream(repo: &Repository, branch: &Branch) -> bool {
     branch
         .get()
         .name()
-        .map_or(false, |refname| repo.branch_upstream_name(refname).is_ok())
+        .is_some_and(|refname| repo.branch_upstream_name(refname).is_ok())
 }
 
 /// Iterate over gone branches.
@@ -74,8 +83,8 @@ fn prune_gone_branches(repo: &Repository) -> Result<(), Error> {
             Ok(()) => {
                 println!("Deleted {name} (restore with `git checkout -b {name} {oid}`)");
             }
-            Err(e) => {
-                eprintln!("Skipped deleting {name} due to {e:?}");
+            Err(error) => {
+                eprintln!("Skipped deleting {name} due to {error}");
             }
         };
     }
