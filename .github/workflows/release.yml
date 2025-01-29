@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
       - run: cargo vendor --locked
-      - run: bsdtar -c -f vendor.tar.zstd --zstd vendor
+      - run: tar -c -f vendor.tar.zstd --zstd vendor
       - uses: actions/attest-build-provenance@v2
         with:
           subject-path: vendor.tar.zstd
