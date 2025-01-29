@@ -18,6 +18,25 @@ jobs:
           name: git-gone.1
           path: git-gone.1
 
+  vendor-dependencies:
+    permissions:
+      id-token: write
+      contents: read
+      attestations: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo vendor --locked
+      - run: bsdtar -c -f vendor.tar.zstd --zstd vendor
+      - uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: vendor.tar.zstd
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vendor.tar.zstd
+          path: vendor.tar.zstd
+
   build-windows:
     needs: build-manpage
     permissions:
@@ -45,7 +64,7 @@ jobs:
 
   create-release:
     runs-on: ubuntu-latest
-    needs: [build-windows]
+    needs: [build-windows, vendor-dependencies]
     permissions:
       contents: write
     steps:
@@ -57,3 +76,4 @@ jobs:
         with:
           files: |
             ./binaries/**/*.zip
+            ./binaries/**/*.tar.*
