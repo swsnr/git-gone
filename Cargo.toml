@@ -41,6 +41,8 @@ default-features = false
 pre-release-commit-message = "Release {{version}}"
 tag-prefix = ""
 tag-message = "Version {{tag_name}}"
+# Github Actions does this for us
+verify = false
 
 [[package.metadata.release.pre-release-replacements]]
 file = "git-gone.1.adoc"
