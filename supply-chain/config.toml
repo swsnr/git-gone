@@ -23,14 +23,6 @@ url = "https://raw.githubusercontent.com/swsnr/rust-supply-chain/refs/heads/main
 audit-as-crates-io = false
 criteria = "safe-to-run"
 
-[[exemptions.git2]]
-version = "0.19.0"
-criteria = "safe-to-run"
-
-[[exemptions.libgit2-sys]]
-version = "0.17.0+1.8.1"
-criteria = "safe-to-run"
-
 [[exemptions.libz-sys]]
 version = "1.1.20"
 criteria = "safe-to-run"

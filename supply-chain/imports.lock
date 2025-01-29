@@ -15,12 +15,24 @@ user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
 
+[[publisher.git2]]
+version = "0.20.0"
+when = "2025-01-05"
+user-id = 55123
+user-login = "rust-lang-owner"
+
 [[publisher.jobserver]]
 version = "0.1.25"
 when = "2022-09-23"
 user-id = 1
 user-login = "alexcrichton"
 user-name = "Alex Crichton"
+
+[[publisher.libgit2-sys]]
+version = "0.18.0+1.9.0"
+when = "2025-01-05"
+user-id = 55123
+user-login = "rust-lang-owner"
 
 [[audits.bytecode-alliance.audits.icu_properties]]
 who = "Nick Fitzgerald <fitzgen@gmail.com>"

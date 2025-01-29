@@ -39,6 +39,12 @@ start = "2020-08-19"
 end = "2025-10-27"
 notes = "Trusted by Mozilla and Bytecode Alliance"
 
+[[trusted.git2]]
+criteria = "safe-to-run"
+user-id = 55123 # rust-lang-owner
+start = "2023-08-28"
+end = "2026-01-29"
+
 [[trusted.jobserver]]
 criteria = "safe-to-run"
 user-id = 1 # Alex Crichton (alexcrichton)
@@ -52,6 +58,12 @@ user-id = 4333
 start = "2020-08-19"
 end = "2025-10-27"
 notes = "Trusted by Mozilla and Bytecode Alliance"
+
+[[trusted.libgit2-sys]]
+criteria = "safe-to-run"
+user-id = 55123 # rust-lang-owner
+start = "2023-08-28"
+end = "2026-01-29"
 
 [[trusted.libz-sys]]
 criteria = "safe-to-run"
