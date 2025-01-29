@@ -7,6 +7,11 @@ criteria = "safe-to-deploy"
 delta = "0.3.29 -> 0.3.30"
 notes = "This change just adds documentation."
 
+[[audits.smallvec]]
+who = "Sebastian Wiesner <sebastian@swsnr.de>"
+criteria = "safe-to-run"
+delta = "1.6.1 -> 1.8.0"
+
 [[audits.tinyvec_macros]]
 who = "Sebastian Wiesner <sebastian@swsnr.de>"
 criteria = "safe-to-deploy"
@@ -15,7 +20,7 @@ notes = "Explicitly forbids unsafe code now; remaining changes is just new licen
 
 [[trusted.cc]]
 criteria = "safe-to-run"
-user-id = 2915
+user-id = 2915 # Amanieu d'Antras (Amanieu)
 start = "2024-02-20"
 end = "2025-10-27"
 notes = "Trusted by Mozilla and Bytecode Alliance"
