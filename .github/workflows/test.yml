@@ -34,6 +34,11 @@ jobs:
       - run: cargo clippy --all-targets --locked
       - run: cargo test --locked
       - run: cargo fmt -- --check
+
+  deny:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
       - uses: EmbarkStudios/cargo-deny-action@v2
 
   doc:
