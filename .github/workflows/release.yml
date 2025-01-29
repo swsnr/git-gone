@@ -6,92 +6,54 @@ on:
       - v*
 
 jobs:
-  build-binaries:
-    runs-on: "${{ matrix.os }}"
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macOS-latest, windows-latest]
-        include:
-          - os: ubuntu-latest
-            target: x86_64-unknown-linux-musl
-          - os: macOS-latest
-            target: x86_64-apple-darwin
-          - os: windows-latest
-            target: x86_64-pc-windows-msvc
+  build-manpage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker://asciidoctor/docker-asciidoctor
+        with:
+          args: asciidoctor -b manpage -a reproducible git-gone.1.adoc
+      - uses: actions/upload-artifact@v4
+        with:
+          name: git-gone.1
+          path: git-gone.1
+
+  build-windows:
+    needs: build-manpage
+    permissions:
+      id-token: write
+      contents: read
+      attestations: write
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/download-artifact@v4
         with:
-          targets: ${{ matrix.target }}
-      - name: Install musl
-        run: sudo apt-get install musl-tools
-        if: contains(matrix.target, 'linux-musl')
-      - run: cargo build --release --target ${{ matrix.target }}
-      - run: strip 'target/${{ matrix.target }}/release/git-gone'
-        if: ${{ !contains(matrix.target, 'windows') }}
-      - id: version
-        shell: bash
-        run: |
-          VERSION="$(cargo pkgid | cut -d'#' -f2 | cut -d: -f2)"
-          echo "::set-output name=version::$VERSION"
-          echo "::set-output name=tag::v$VERSION"
-      - id: package
-        shell: bash
-        run: |
-          ARCHIVE_NAME="git-gone-${{ steps.version.outputs.tag }}-${{ matrix.target }}"
-          if [[ '${{ matrix.target }}' == *windows* ]]; then
-            ARCHIVE_FILE="${ARCHIVE_NAME}.zip"
-            mv LICENSE LICENSE.txt
-            7z a "${ARCHIVE_FILE}" "./target/${{ matrix.target }}/release/git-gone.exe" ./git-gone.1.adoc ./CHANGELOG.md ./LICENSE.txt
-            echo ::set-output "name=file::${ARCHIVE_FILE}"
-            echo ::set-output "name=name::${ARCHIVE_NAME}.zip"
-          else
-            ARCHIVE_FILE="${ARCHIVE_NAME}.tar.gz"
-            mkdir "/tmp/${ARCHIVE_NAME}"
-            cp git-gone.1.adoc git-gone.1 CHANGELOG.md LICENSE "target/${{ matrix.target }}/release/git-gone" "/tmp/${ARCHIVE_NAME}"
-            tar -czf "${PWD}/${ARCHIVE_FILE}" -C /tmp/ "${ARCHIVE_NAME}"
-            echo ::set-output "name=file::${ARCHIVE_FILE}"
-            echo ::set-output "name=name::${ARCHIVE_NAME}.tar.gz"
-          fi
+          path: ./artifacts
+      - run: mv artifacts/git-gone.1 .
+      - run: cargo build --locked --release
+      - run: mv LICENSE LICENSE.txt
+      - run: 7z a git-gone-windows-latest.zip ./target/release/git-gone.exe ./git-gone.1 ./git-gone.1.adoc ./LICENSE.txt
+      - uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: git-gone-windows-latest.zip
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ steps.package.outputs.name }}
-          path: ${{ steps.package.outputs.file }}
+          name: git-gone-windows-latest.zip
+          path: git-gone-windows-latest.zip
 
   create-release:
     runs-on: ubuntu-latest
-    needs: build-binaries
+    needs: [build-windows]
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v4
         with:
           path: ./binaries
-      - shell: bash
-        run: |
-          for directory in *; do (
-            cd "$directory"; shopt -s nullglob; b2sum *.zip *.tar.gz >> ../B2SUMS.txt; sha512sum *.zip *.tar.gz >> ../SHA512SUM.txt
-          ); done
-        working-directory: binaries
-      - id: version
-        shell: bash
-        run: |
-          VERSION="$(cargo pkgid | cut -d'#' -f2 | cut -d: -f2)"
-          echo "::set-output name=version::$VERSION"
-      - shell: bash
-        run: |
-          awk -v r='${{ steps.version.outputs.version }}' \
-            '/^\[[^]]*\]/{print $0}/^## \[[0-9]/ && match($0, /\[[0-9][^]]*\]/){if (r == substr($0, RSTART+1, RLENGTH-2)) { p=1; next } else { p=0 } }p' \
-            CHANGELOG.md > ./CHANGELOG-release.md
-          cat CHANGELOG-release.md
       - uses: softprops/action-gh-release@v2
         with:
-          name: v${{ steps.version.outputs.version }}
-          body_path: ./CHANGELOG-release.md
           files: |
             ./binaries/**/*.zip
-            ./binaries/**/*.tar.gz
-            ./binaries/B2SUMS.txt
-            ./binaries/SHA512SUM.txt
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
