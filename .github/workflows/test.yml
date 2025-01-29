@@ -1,0 +1,61 @@
+name: "Build & lint"
+
+on:
+  push:
+    branches: main
+    # Don't run CI for tags; there's always a branch for the tag as well so
+    # there's no point in testing it separately
+    tags-ignore: "*"
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: "${{ matrix.os }}"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        id: toolchain
+        with:
+          components: rustfmt, clippy
+      # See https://github.com/actions/cache/blob/main/examples.md#rust---cargo
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-rust-${{ steps.toolchain.outputs.cachekey }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - run: cargo build --all-targets --locked
+      - run: cargo clippy --all-targets --locked
+      - run: cargo test --locked
+      - run: cargo fmt -- --check
+      - uses: EmbarkStudios/cargo-deny-action@v2
+
+  doc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker://asciidoctor/docker-asciidoctor
+        with:
+          args: asciidoctor -b manpage -a reproducible git-gone.1.adoc
+
+  # See https://mozilla.github.io/cargo-vet/configuring-ci.html
+  cargo-vet:
+    runs-on: ubuntu-latest
+    env:
+      CARGO_VET_VERSION: 0.10.0
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/cache@v4
+        with:
+          path: ${{ runner.tool_cache }}/cargo-vet
+          key: cargo-vet-bin-${{ env.CARGO_VET_VERSION }}
+      - run: echo "${{ runner.tool_cache }}/cargo-vet/bin" >> $GITHUB_PATH
+      - run: cargo install --root ${{ runner.tool_cache }}/cargo-vet --version ${{ env.CARGO_VET_VERSION }} cargo-vet
+      - run: cargo vet --locked
