@@ -1,4 +1,0 @@
-pre-release-commit-message = "Release {{version}}"
-tag-prefix = ""
-tag-message = "Version {{tag_name}}"
-pre-release-hook = ["./scripts/prerelease-update-manpage"]

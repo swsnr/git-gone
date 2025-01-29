@@ -36,3 +36,18 @@ version = "0.20.0"
 # Specifically this also disables SSL and SSH support and thus removes library dependencies, which permits
 # a static musl build.
 default-features = false
+
+[package.metadata.release]
+pre-release-commit-message = "Release {{version}}"
+tag-prefix = ""
+tag-message = "Version {{tag_name}}"
+
+[[package.metadata.release.pre-release-replacements]]
+file = "git-gone.1.adoc"
+search = "^:revnumber: .*$"
+replace = ":revnumber: {{version}}"
+
+[[package.metadata.release.pre-release-replacements]]
+file = "git-gone.1.adoc"
+search = "^:revdate: .*$"
+replace = ":revdate: {{date}}"
