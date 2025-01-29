@@ -31,7 +31,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           path: ./artifacts
-      - run: mv artifacts/git-gone.1 .
+      - run: mv artifacts/git-gone.1/git-gone.1 .
       - run: cargo build --locked --release
       - run: mv LICENSE LICENSE.txt
       - run: 7z a git-gone-windows-latest.zip ./target/release/git-gone.exe ./git-gone.1 ./git-gone.1.adoc ./LICENSE.txt
