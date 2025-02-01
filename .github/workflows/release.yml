@@ -77,3 +77,14 @@ jobs:
           files: |
             ./binaries/**/*.zip
             ./binaries/**/*.tar.*
+
+  publish:
+    runs-on: ubuntu-latest
+    # When the release is good publish to crates.io
+    needs: [create-release]
+    env:
+      CARGO_REGISTRY_TOKEN: '${{ secrets.CARGO_REGISTRY_TOKEN }}'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo publish --no-verify
