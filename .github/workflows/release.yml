@@ -27,8 +27,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
+      - run: cargo --version
+      - run: tar --version
+      - run: zstd --version
+      - run: echo "${GITHUB_SHA}"
+      # Generate a reproducible vendor bundle
+      - run: env LC_ALL=C TZ=UTC0 echo "timestamp=$(git show --quiet --date='format-local:%Y-%m-%dT%H:%M:%SZ' --format="%cd" "${GITHUB_SHA}")" >> "$GITHUB_OUTPUT"
+        id: timestamp
       - run: cargo vendor --locked
-      - run: tar -c -f vendor.tar.zstd --zstd vendor
+      - run: env LC_ALL=C tar --numeric-owner --owner 0 --group 0 --sort name --mode='go+u,go-w' --format=posix --pax-option=exthdr.name=%d/PaxHeaders/%f --pax-option=delete=atime,delete=ctime --mtime="${{ steps.timestamp.outputs.timestamp }}" -c -f vendor.tar.zstd --zstd vendor
       - uses: actions/attest-build-provenance@v2
         with:
           subject-path: vendor.tar.zstd
