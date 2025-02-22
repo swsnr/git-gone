@@ -9,7 +9,7 @@ license = "Apache-2.0"
 keywords = ["git", "branch", "remote"]
 categories = ["development-tools", "command-line-utilities"]
 authors = ["Sebastian Wiesner <sebastian@swsnr.de>"]
-edition = "2021"
+edition = "2024"
 include = [
     "git-gone.1",
     "git-gone.1.adoc",
