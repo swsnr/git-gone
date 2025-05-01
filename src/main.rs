@@ -86,7 +86,7 @@ fn prune_gone_branches(repo: &Repository) -> Result<(), Error> {
             Err(error) => {
                 eprintln!("Skipped deleting {name} due to {error}");
             }
-        };
+        }
     }
     Ok(())
 }
