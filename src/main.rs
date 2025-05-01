@@ -107,7 +107,7 @@ git gone can list these branches and also prune them from your clone.
 
 Copyright (C) 2018–2020 Sebastian Wiesner
 Licensed under the Apache License, Version 2.0
-Report issues to <https://github.com/swsnr/git-gone>."
+Report issues to <https://codeberg.org/swsnr/git-gone>."
 }
 
 #[derive(Debug, clap::Parser)]

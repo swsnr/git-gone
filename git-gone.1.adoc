@@ -44,7 +44,7 @@ Prints a list of deleted branches including a command to restore the branch as l
 
 == Bugs
 
-Please report bugs to https://github.com/swsnr/git-gone/issues/new.
+Please report bugs to https://codeberg.org/swsnr/git-gone/issues/new.
 
 == See also
 
@@ -58,7 +58,7 @@ All credits for the idea go to Eugene Yokota (see http://eed3si9n.com/):
 
 == Copyright
 
-Copyright 2018-2020 Sebastian Wiesner <sebastian@swsnr.de>
+Copyright 2018-2025 Sebastian Wiesner <sebastian@swsnr.de>
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
 You may obtain a copy of the License at <http://www.apache.org/licenses/LICENSE-2.0>.
