@@ -17,7 +17,7 @@ url = "https://raw.githubusercontent.com/google/supply-chain/main/audits.toml"
 url = "https://raw.githubusercontent.com/mozilla/supply-chain/main/audits.toml"
 
 [imports.swsnr]
-url = "https://raw.githubusercontent.com/swsnr/rust-supply-chain/refs/heads/main/audits.toml"
+url = "https://codeberg.org/swsnr/rust-supply-chain/raw/branch/main/audits.toml"
 
 [policy.git-gone]
 audit-as-crates-io = false
