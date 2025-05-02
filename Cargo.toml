@@ -4,20 +4,13 @@ version = "1.2.5"
 description = "Manage \"gone\" Git branches"
 homepage = "https://codeberg.org/swsnr/git-gone"
 repository = "https://codeberg.org/swsnr/git-gone.git"
-readme = "README.adoc"
+readme = "README.md"
 license = "Apache-2.0"
 keywords = ["git", "branch", "remote"]
 categories = ["development-tools", "command-line-utilities"]
 authors = ["Sebastian Wiesner <sebastian@swsnr.de>"]
 edition = "2024"
-include = [
-    "git-gone.1",
-    "git-gone.1.adoc",
-    "src/*.rs",
-    "*.md",
-    "LICENSE",
-    "README",
-]
+include = ["src/*.rs", "*.md", "LICENSE", "README,md"]
 
 [dependencies]
 clap = { version = "4.5.1", default-features = false, features = [
@@ -49,13 +42,3 @@ publish = false
 # if the pipeline's good; release tag rules will prevent us from pushing a tag
 # for a commit which is not green
 push = false
-
-[[package.metadata.release.pre-release-replacements]]
-file = "git-gone.1.adoc"
-search = "^:revnumber: .*$"
-replace = ":revnumber: {{version}}"
-
-[[package.metadata.release.pre-release-replacements]]
-file = "git-gone.1.adoc"
-search = "^:revdate: .*$"
-replace = ":revdate: {{date}}"
