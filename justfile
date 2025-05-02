@@ -33,7 +33,7 @@ vendor: dist
 # Build and sign a reproducible git archive bundle
 git-archive: dist
     env LC_ALL=C TZ=UTC0 git archive --format tar \
-        --prefix "git-gone-$(git describe)" \
+        --prefix "git-gone-$(git describe)/" \
         --output "dist/git-gone-$(git describe).tar" HEAD
     zstd --rm "dist/git-gone-$(git describe).tar"
     ssh-keygen -Y sign -f dist/key -n file "dist/git-gone-$(git describe).tar.zst"
