@@ -1,2 +1,8 @@
 # Rust build files
 /target/
+
+# Files for distribution
+/dist/
+
+# cargo vendor
+/vendor/
