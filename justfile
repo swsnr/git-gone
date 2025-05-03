@@ -9,14 +9,14 @@ test-all:
     cargo +stable clippy --locked
     cargo +stable test --locked
 
-dist:
+_dist:
     rm -rf dist
     mkdir -p dist
     # Get my codeberg SSH key for signing the artifacts
     curl https://codeberg.org/swsnr.keys > dist/key
 
 # Build and sign a reproducible archive of cargo vendor sources
-vendor: dist
+vendor: _dist
     rm -rf vendor/
     cargo vendor --locked
     echo SOURCE_DATE_EPOCH="$(env LC_ALL=C TZ=UTC0 git show --quiet --date='format-local:%Y-%m-%dT%H:%M:%SZ' --format="%cd" HEAD)"
@@ -31,7 +31,7 @@ vendor: dist
     ssh-keygen -Y sign -f dist/key -n file "dist/git-gone-$(git describe)-vendor.tar.zst"
 
 # Build and sign a reproducible git archive bundle
-git-archive: dist
+git-archive: _dist
     env LC_ALL=C TZ=UTC0 git archive --format tar \
         --prefix "git-gone-$(git describe)/" \
         --output "dist/git-gone-$(git describe).tar" HEAD
