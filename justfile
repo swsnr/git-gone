@@ -12,11 +12,9 @@ test-all:
 _dist:
     rm -rf dist
     mkdir -p dist
-    # Get my codeberg SSH key for signing the artifacts
-    curl https://codeberg.org/swsnr.keys > dist/key
 
 # Build and sign a reproducible archive of cargo vendor sources
-vendor: _dist
+_vendor: _dist
     rm -rf vendor/
     cargo vendor --locked
     echo SOURCE_DATE_EPOCH="$(env LC_ALL=C TZ=UTC0 git show --quiet --date='format-local:%Y-%m-%dT%H:%M:%SZ' --format="%cd" HEAD)"
@@ -28,17 +26,19 @@ vendor: _dist
         --mtime="$(env LC_ALL=C TZ=UTC0 git show --quiet --date='format-local:%Y-%m-%dT%H:%M:%SZ' --format="%cd" HEAD)" \
         -c -f "dist/git-gone-$(git describe)-vendor.tar.zst" \
         --zstd vendor
-    ssh-keygen -Y sign -f dist/key -n file "dist/git-gone-$(git describe)-vendor.tar.zst"
 
 # Build and sign a reproducible git archive bundle
-git-archive: _dist
+_git-archive: _dist
     env LC_ALL=C TZ=UTC0 git archive --format tar \
         --prefix "git-gone-$(git describe)/" \
         --output "dist/git-gone-$(git describe).tar" HEAD
     zstd --rm "dist/git-gone-$(git describe).tar"
-    ssh-keygen -Y sign -f dist/key -n file "dist/git-gone-$(git describe).tar.zst"
 
-package: git-archive vendor
+package: _git-archive _vendor
+    curl https://codeberg.org/swsnr.keys > dist/key
+    ssh-keygen -Y sign -f dist/key -n file "dist/git-gone-$(git describe)-vendor.tar.zst"
+    ssh-keygen -Y sign -f dist/key -n file "dist/git-gone-$(git describe).tar.zst"
+    rm -f dist/key
 
 release *ARGS: test-all
     cargo release {{ARGS}}
