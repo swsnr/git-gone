@@ -9,6 +9,9 @@ test-all:
     cargo +stable clippy --locked
     cargo +stable test --locked
 
+clean:
+    rm -rf dist vendor
+
 _dist:
     rm -rf dist
     mkdir -p dist
