@@ -23,73 +23,8 @@
     clippy::let_underscore_untyped,
 )]
 
-use git2::{Branch, BranchType, Error, ErrorCode, Repository};
-
-/// Whether a branch has an upstream.
-///
-/// Try to get the name of the upstream branch of the given branch.  If it
-/// exists the branch has an upstream, otherwise it hasn't.
-fn has_upstream(repo: &Repository, branch: &Branch) -> bool {
-    // branch_upstream_name expects the full refname (e.g. refs/heads/…) so
-    // we move the underlying reference with .get().
-    branch
-        .get()
-        .name()
-        .is_some_and(|refname| repo.branch_upstream_name(refname).is_ok())
-}
-
-/// Iterate over gone branches.
-///
-/// Find all branches which still have an upstream branch configured, but
-/// whose upstream doesn't exist anymore.  These branches had an upstream once
-/// probably because they were pushed, but the upstream is gone, e.g. was
-/// deleted on the remote.
-fn find_gone_branches(repo: &Repository) -> Result<impl Iterator<Item = Branch<'_>>, Error> {
-    let local_branches = repo
-        .branches(Some(BranchType::Local))?
-        .collect::<Result<Vec<(Branch<'_>, BranchType)>, Error>>()?;
-    Ok(local_branches
-        .into_iter()
-        .map(|item| item.0)
-        // Look at branches which have an upstream branch…
-        .filter(move |branch| has_upstream(repo, branch))
-        // …and if that upstream doesn't exist anymore, we have a branch which
-        // had an upstream once, but no more, so the upstream’s gone.
-        .filter(|branch| {
-            branch
-                .upstream()
-                .err()
-                .iter()
-                .any(|error| error.code() == ErrorCode::NotFound)
-        }))
-}
-
-/// List all gone branches from the given repo on standard output.
-fn list_gone_branches(repo: &Repository) -> Result<(), Error> {
-    for branch in find_gone_branches(repo)? {
-        let name = String::from_utf8_lossy(branch.name_bytes()?);
-        println!("{name}");
-    }
-    Ok(())
-}
-
-/// Prune gone branches from the given repository.
-fn prune_gone_branches(repo: &Repository) -> Result<(), Error> {
-    for mut branch in find_gone_branches(repo)? {
-        let oid = branch.get().peel_to_commit()?.id();
-        // Take a copy of the name cow because "delete()" borrows mutable
-        let name = String::from_utf8_lossy(branch.name_bytes()?).to_string();
-        match branch.delete() {
-            Ok(()) => {
-                println!("Deleted {name} (restore with `git checkout -b {name} {oid}`)");
-            }
-            Err(error) => {
-                eprintln!("Skipped deleting {name} due to {error}");
-            }
-        }
-    }
-    Ok(())
-}
+use anyhow::Result;
+use gix::remote::Direction;
 
 fn after_help() -> &'static str {
     "\
@@ -129,11 +64,44 @@ enum Command {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     use clap::Parser;
     let args = Args::parse();
-    let repo = Repository::open_from_env()?;
+    let repo =
+        gix::ThreadSafeRepository::discover_with_environment_overrides(".")?.to_thread_local();
+
+    let references = repo.references()?;
+    let gone_branches = references
+        .local_branches()?
+        // Discard invalid refs
+        .filter_map(std::result::Result::ok)
+        // Find all refs that have a configured tracking branch on the remote
+        .filter(|reference| {
+            if let Some(Ok(refname)) = reference.remote_tracking_ref_name(Direction::Fetch) {
+                if let Ok(None) = repo.try_find_reference(refname.as_ref()) {
+                    return true;
+                }
+            }
+            false
+        });
 
     match args.command.unwrap_or(Command::List) {
-        Command::List => list_gone_branches(&repo)?,
-        Command::Prune => prune_gone_branches(&repo)?,
+        Command::List => {
+            for branch in gone_branches {
+                println!("{}", branch.name().shorten());
+            }
+        }
+        Command::Prune => {
+            for mut branch in gone_branches {
+                let oid = branch.peel_to_commit()?.id();
+                let name = branch.name().shorten().to_owned();
+                match branch.delete() {
+                    Ok(()) => {
+                        println!("Deleted {name} (restore with `git switch -c {name} {oid}`)");
+                    }
+                    Err(error) => {
+                        eprintln!("Skipped deleting {name} due to {error}");
+                    }
+                }
+            }
+        }
     }
 
     Ok(())
