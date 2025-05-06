@@ -16,10 +16,35 @@ who = "Sebastian Wiesner <sebastian@swsnr.de>"
 criteria = "safe-to-run"
 delta = "4.5.29 -> 4.5.30"
 
+[[audits.cpufeatures]]
+who = "Sebastian Wiesner <sebastian@swsnr.de>"
+criteria = "safe-to-run"
+delta = "0.2.9 -> 0.2.17"
+
+[[audits.home]]
+who = "Sebastian Wiesner <sebastian@swsnr.de>"
+criteria = "safe-to-run"
+delta = "0.5.9 -> 0.5.11"
+
 [[audits.log]]
 who = "Sebastian Wiesner <sebastian@swsnr.de>"
 criteria = "safe-to-run"
 delta = "0.4.25 -> 0.4.26"
+
+[[audits.memmap2]]
+who = "Sebastian Wiesner <sebastian@swsnr.de>"
+criteria = "safe-to-run"
+delta = "0.9.3 -> 0.9.5"
+
+[[audits.miniz_oxide]]
+who = "Sebastian Wiesner <sebastian@swsnr.de>"
+criteria = "safe-to-run"
+delta = "0.8.5 -> 0.8.8"
+
+[[audits.miniz_oxide]]
+who = "Sebastian Wiesner <sebastian@swsnr.de>"
+criteria = "safe-to-run"
+delta = "0.8.5 -> 0.8.8"
 
 [[audits.pkg-config]]
 who = "Sebastian Wiesner <sebastian@swsnr.de>"
@@ -53,6 +78,23 @@ who = "Sebastian Wiesner <sebastian@swsnr.de>"
 criteria = "safe-to-run"
 delta = "1.0.16 -> 1.0.17"
 
+[[audits.version_check]]
+who = "Sebastian Wiesner <sebastian@swsnr.de>"
+criteria = "safe-to-run"
+delta = "0.9.4 -> 0.9.5"
+
+[[trusted.anyhow]]
+criteria = "safe-to-run"
+user-id = 3618 # David Tolnay (dtolnay)
+start = "2019-10-05"
+end = "2026-05-06"
+
+[[trusted.bstr]]
+criteria = "safe-to-run"
+user-id = 189 # Andrew Gallant (BurntSushi)
+start = "2019-04-02"
+end = "2026-05-06"
+
 [[trusted.cc]]
 criteria = "safe-to-run"
 user-id = 2915 # Amanieu d'Antras (Amanieu)
@@ -67,6 +109,18 @@ start = "2021-12-08"
 end = "2025-10-27"
 notes = "Trusted by Mozilla and Bytecode Alliance"
 
+[[trusted.errno]]
+criteria = "safe-to-run"
+user-id = 6825 # Dan Gohman (sunfishcode)
+start = "2023-08-29"
+end = "2026-05-06"
+
+[[trusted.flate2]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-08-15"
+end = "2026-05-06"
+
 [[trusted.git2]]
 criteria = "safe-to-run"
 user-id = 4333
@@ -79,6 +133,252 @@ criteria = "safe-to-run"
 user-id = 55123 # rust-lang-owner
 start = "2023-08-28"
 end = "2026-01-29"
+
+[[trusted.gix]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-10"
+end = "2026-05-06"
+
+[[trusted.gix-actor]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-chunk]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-command]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-commitgraph]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-config]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-config-value]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-date]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-diff]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-discover]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-features]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-fs]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-04-19"
+end = "2026-05-06"
+
+[[trusted.gix-glob]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-hash]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-hashtable]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-lock]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-object]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-odb]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-pack]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-packetline]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-path]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-protocol]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-quote]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-ref]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-refspec]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-revision]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-revwalk]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-06-10"
+end = "2026-05-06"
+
+[[trusted.gix-sec]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-shallow]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2024-12-22"
+end = "2026-05-06"
+
+[[trusted.gix-tempfile]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-trace]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-06-16"
+end = "2026-05-06"
+
+[[trusted.gix-transport]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-traverse]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-url]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.gix-utils]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-04-19"
+end = "2026-05-06"
+
+[[trusted.gix-validate]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2023-02-17"
+end = "2026-05-06"
+
+[[trusted.hashbrown]]
+criteria = "safe-to-run"
+user-id = 2915 # Amanieu d'Antras (Amanieu)
+start = "2019-04-02"
+end = "2026-05-06"
+
+[[trusted.jiff]]
+criteria = "safe-to-run"
+user-id = 189 # Andrew Gallant (BurntSushi)
+start = "2024-02-17"
+end = "2026-05-06"
+
+[[trusted.jiff-static]]
+criteria = "safe-to-run"
+user-id = 189 # Andrew Gallant (BurntSushi)
+start = "2025-03-06"
+end = "2026-05-06"
+
+[[trusted.jiff-tzdb]]
+criteria = "safe-to-run"
+user-id = 189 # Andrew Gallant (BurntSushi)
+start = "2024-07-09"
+end = "2026-05-06"
+
+[[trusted.jiff-tzdb-platform]]
+criteria = "safe-to-run"
+user-id = 189 # Andrew Gallant (BurntSushi)
+start = "2024-07-09"
+end = "2026-05-06"
 
 [[trusted.jobserver]]
 criteria = "safe-to-run"
@@ -119,8 +419,158 @@ start = "2020-08-14"
 end = "2025-10-27"
 notes = "Trusted by Mozilla and Bytecode Alliance"
 
+[[trusted.linux-raw-sys]]
+criteria = "safe-to-run"
+user-id = 6825 # Dan Gohman (sunfishcode)
+start = "2021-06-12"
+end = "2026-05-06"
+
+[[trusted.lock_api]]
+criteria = "safe-to-run"
+user-id = 2915 # Amanieu d'Antras (Amanieu)
+start = "2019-05-04"
+end = "2026-05-06"
+
+[[trusted.memchr]]
+criteria = "safe-to-run"
+user-id = 189 # Andrew Gallant (BurntSushi)
+start = "2019-07-07"
+end = "2026-05-06"
+
+[[trusted.parking_lot]]
+criteria = "safe-to-run"
+user-id = 2915 # Amanieu d'Antras (Amanieu)
+start = "2019-05-04"
+end = "2026-05-06"
+
+[[trusted.parking_lot_core]]
+criteria = "safe-to-run"
+user-id = 2915 # Amanieu d'Antras (Amanieu)
+start = "2019-05-04"
+end = "2026-05-06"
+
+[[trusted.portable-atomic]]
+criteria = "safe-to-run"
+user-id = 33035 # Taiki Endo (taiki-e)
+start = "2022-02-24"
+end = "2026-05-06"
+
+[[trusted.portable-atomic-util]]
+criteria = "safe-to-run"
+user-id = 33035 # Taiki Endo (taiki-e)
+start = "2023-01-15"
+end = "2026-05-06"
+
+[[trusted.prodash]]
+criteria = "safe-to-run"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2020-02-16"
+end = "2026-05-06"
+
+[[trusted.rustix]]
+criteria = "safe-to-run"
+user-id = 6825 # Dan Gohman (sunfishcode)
+start = "2021-10-29"
+end = "2026-05-06"
+
+[[trusted.scopeguard]]
+criteria = "safe-to-run"
+user-id = 2915 # Amanieu d'Antras (Amanieu)
+start = "2020-02-16"
+end = "2026-05-06"
+
 [[trusted.syn]]
 criteria = "safe-to-run"
 user-id = 3618 # David Tolnay (dtolnay)
 start = "2019-03-01"
 end = "2026-02-22"
+
+[[trusted.thiserror]]
+criteria = "safe-to-run"
+user-id = 3618 # David Tolnay (dtolnay)
+start = "2019-10-09"
+end = "2026-05-06"
+
+[[trusted.thiserror-impl]]
+criteria = "safe-to-run"
+user-id = 3618 # David Tolnay (dtolnay)
+start = "2019-10-09"
+end = "2026-05-06"
+
+[[trusted.walkdir]]
+criteria = "safe-to-run"
+user-id = 189 # Andrew Gallant (BurntSushi)
+start = "2019-06-09"
+end = "2026-05-06"
+
+[[trusted.wasi]]
+criteria = "safe-to-run"
+user-id = 1 # Alex Crichton (alexcrichton)
+start = "2020-06-03"
+end = "2026-05-06"
+
+[[trusted.windows-sys]]
+criteria = "safe-to-run"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2021-11-15"
+end = "2026-05-06"
+
+[[trusted.windows-targets]]
+criteria = "safe-to-run"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2022-09-09"
+end = "2026-05-06"
+
+[[trusted.windows_aarch64_gnullvm]]
+criteria = "safe-to-run"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2022-09-01"
+end = "2026-05-06"
+
+[[trusted.windows_aarch64_msvc]]
+criteria = "safe-to-run"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2021-11-05"
+end = "2026-05-06"
+
+[[trusted.windows_i686_gnu]]
+criteria = "safe-to-run"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2021-10-28"
+end = "2026-05-06"
+
+[[trusted.windows_i686_gnullvm]]
+criteria = "safe-to-run"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2024-04-02"
+end = "2026-05-06"
+
+[[trusted.windows_i686_msvc]]
+criteria = "safe-to-run"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2021-10-27"
+end = "2026-05-06"
+
+[[trusted.windows_x86_64_gnu]]
+criteria = "safe-to-run"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2021-10-28"
+end = "2026-05-06"
+
+[[trusted.windows_x86_64_gnullvm]]
+criteria = "safe-to-run"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2022-09-01"
+end = "2026-05-06"
+
+[[trusted.windows_x86_64_msvc]]
+criteria = "safe-to-run"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2021-10-27"
+end = "2026-05-06"
+
+[[trusted.winnow]]
+criteria = "safe-to-run"
+user-id = 6743 # Ed Page (epage)
+start = "2023-02-22"
+end = "2026-05-06"

@@ -13,6 +13,9 @@ url = "https://raw.githubusercontent.com/EmbarkStudios/rust-ecosystem/main/audit
 [imports.google]
 url = "https://raw.githubusercontent.com/google/supply-chain/main/audits.toml"
 
+[imports.isrg]
+url = "https://raw.githubusercontent.com/divviup/libprio-rs/main/supply-chain/audits.toml"
+
 [imports.mozilla]
 url = "https://raw.githubusercontent.com/mozilla/supply-chain/main/audits.toml"
 
@@ -21,4 +24,56 @@ url = "https://codeberg.org/swsnr/rust-supply-chain/raw/branch/main/audits.toml"
 
 [policy.git-gone]
 audit-as-crates-io = false
+criteria = "safe-to-run"
+
+[[exemptions.arc-swap]]
+version = "1.7.1"
+criteria = "safe-to-run"
+
+[[exemptions.clru]]
+version = "0.6.2"
+criteria = "safe-to-run"
+
+[[exemptions.digest]]
+version = "0.9.0"
+criteria = "safe-to-run"
+
+[[exemptions.dunce]]
+version = "1.0.5"
+criteria = "safe-to-run"
+
+[[exemptions.faster-hex]]
+version = "0.10.0"
+criteria = "safe-to-run"
+
+[[exemptions.getrandom]]
+version = "0.3.2"
+criteria = "safe-to-run"
+
+[[exemptions.hash32]]
+version = "0.3.1"
+criteria = "safe-to-run"
+
+[[exemptions.heapless]]
+version = "0.8.0"
+criteria = "safe-to-run"
+
+[[exemptions.r-efi]]
+version = "5.2.0"
+criteria = "safe-to-run"
+
+[[exemptions.redox_syscall]]
+version = "0.5.12"
+criteria = "safe-to-run"
+
+[[exemptions.sha1-checked]]
+version = "0.10.0"
+criteria = "safe-to-run"
+
+[[exemptions.typenum]]
+version = "1.18.0"
+criteria = "safe-to-run"
+
+[[exemptions.unicode-bom]]
+version = "2.0.3"
 criteria = "safe-to-run"
