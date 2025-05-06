@@ -13,6 +13,8 @@ edition = "2024"
 include = ["src/*.rs", "*.md", "LICENSE", "README,md"]
 
 [dependencies]
+anyhow = "1.0.98"
+gix = { version = "0.72.1", default-features = false }
 clap = { version = "4.5.1", default-features = false, features = [
     "std",
     # Auto-generate help and usage info
@@ -22,13 +24,6 @@ clap = { version = "4.5.1", default-features = false, features = [
     "error-context",
     "derive",
 ] }
-
-[dependencies.git2]
-version = "0.20.0"
-# Disable all features of git2; we only use a small subset of the library and do not need any of these.
-# Specifically this also disables SSL and SSH support and thus removes library dependencies, which permits
-# a static musl build.
-default-features = false
 
 [package.metadata.release]
 pre-release-commit-message = "Release {{version}}"
