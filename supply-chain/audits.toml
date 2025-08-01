@@ -1,6 +1,11 @@
 
 # cargo-vet audits file
 
+[[audits.adler2]]
+who = "Sebastian Wiesner <sebastian@swsnr.de>"
+criteria = "safe-to-run"
+delta = "2.0.0 -> 2.0.1"
+
 [[audits.cc]]
 who = "Sebastian Wiesner <sebastian@swsnr.de>"
 criteria = "safe-to-run"
@@ -21,10 +26,20 @@ who = "Sebastian Wiesner <sebastian@swsnr.de>"
 criteria = "safe-to-run"
 delta = "0.2.9 -> 0.2.17"
 
+[[audits.crc32fast]]
+who = "Sebastian Wiesner <sebastian@swsnr.de>"
+criteria = "safe-to-run"
+delta = "1.4.2 -> 1.5.0"
+
 [[audits.home]]
 who = "Sebastian Wiesner <sebastian@swsnr.de>"
 criteria = "safe-to-run"
 delta = "0.5.9 -> 0.5.11"
+
+[[audits.libz-rs-sys]]
+who = "Sebastian Wiesner <sebastian@swsnr.de>"
+criteria = "safe-to-run"
+delta = "0.5.0 -> 0.5.1"
 
 [[audits.log]]
 who = "Sebastian Wiesner <sebastian@swsnr.de>"
@@ -35,6 +50,11 @@ delta = "0.4.25 -> 0.4.26"
 who = "Sebastian Wiesner <sebastian@swsnr.de>"
 criteria = "safe-to-run"
 delta = "0.9.3 -> 0.9.5"
+
+[[audits.memmap2]]
+who = "Sebastian Wiesner <sebastian@swsnr.de>"
+criteria = "safe-to-run"
+delta = "0.9.5 -> 0.9.7"
 
 [[audits.miniz_oxide]]
 who = "Sebastian Wiesner <sebastian@swsnr.de>"
@@ -51,6 +71,16 @@ who = "Sebastian Wiesner <sebastian@swsnr.de>"
 criteria = "safe-to-deploy"
 delta = "0.3.29 -> 0.3.30"
 notes = "This change just adds documentation."
+
+[[audits.r-efi]]
+who = "Sebastian Wiesner <sebastian@swsnr.de>"
+criteria = "safe-to-run"
+delta = "5.2.0 -> 5.3.0"
+
+[[audits.redox_syscall]]
+who = "Sebastian Wiesner <sebastian@swsnr.de>"
+criteria = "safe-to-run"
+delta = "0.5.13 -> 0.5.17"
 
 [[audits.serde]]
 who = "Sebastian Wiesner <sebastian@swsnr.de>"
@@ -83,6 +113,17 @@ who = "Sebastian Wiesner <sebastian@swsnr.de>"
 criteria = "safe-to-run"
 delta = "0.9.4 -> 0.9.5"
 
+[[audits.zlib-rs]]
+who = "Sebastian Wiesner <sebastian@swsnr.de>"
+criteria = "safe-to-run"
+delta = "0.5.0 -> 0.5.1"
+
+[[trusted.anstyle]]
+criteria = "safe-to-run"
+user-id = 6743 # Ed Page (epage)
+start = "2022-05-18"
+end = "2026-08-01"
+
 [[trusted.anyhow]]
 criteria = "safe-to-run"
 user-id = 3618 # David Tolnay (dtolnay)
@@ -102,12 +143,30 @@ start = "2024-02-20"
 end = "2025-10-27"
 notes = "Trusted by Mozilla and Bytecode Alliance"
 
+[[trusted.clap]]
+criteria = "safe-to-run"
+user-id = 6743 # Ed Page (epage)
+start = "2021-12-08"
+end = "2026-08-01"
+
+[[trusted.clap_builder]]
+criteria = "safe-to-run"
+user-id = 6743 # Ed Page (epage)
+start = "2023-03-28"
+end = "2026-08-01"
+
 [[trusted.clap_derive]]
 criteria = "safe-to-run"
 user-id = 6743 # Ed Page (epage)
 start = "2021-12-08"
 end = "2025-10-27"
 notes = "Trusted by Mozilla and Bytecode Alliance"
+
+[[trusted.clap_lex]]
+criteria = "safe-to-run"
+user-id = 6743 # Ed Page (epage)
+start = "2022-04-15"
+end = "2026-08-01"
 
 [[trusted.errno]]
 criteria = "safe-to-run"
@@ -406,6 +465,12 @@ user-id = 55123 # rust-lang-owner
 start = "2023-08-28"
 end = "2026-01-29"
 
+[[trusted.libz-rs-sys]]
+criteria = "safe-to-run"
+user-id = 1303
+start = "2024-02-23"
+end = "2026-08-01"
+
 [[trusted.libz-sys]]
 criteria = "safe-to-run"
 user-id = 980 # Sebastian Thiel (Byron)
@@ -509,6 +574,12 @@ user-id = 1 # Alex Crichton (alexcrichton)
 start = "2020-06-03"
 end = "2026-05-06"
 
+[[trusted.windows-link]]
+criteria = "safe-to-run"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2024-07-17"
+end = "2026-08-01"
+
 [[trusted.windows-sys]]
 criteria = "safe-to-run"
 user-id = 64539 # Kenny Kerr (kennykerr)
@@ -574,3 +645,9 @@ criteria = "safe-to-run"
 user-id = 6743 # Ed Page (epage)
 start = "2023-02-22"
 end = "2026-05-06"
+
+[[trusted.zlib-rs]]
+criteria = "safe-to-run"
+user-id = 1303
+start = "2024-02-23"
+end = "2026-08-01"

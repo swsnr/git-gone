@@ -16,3 +16,9 @@ unknown-git = "deny"
 
 [bans]
 multiple-versions = "deny"
+skip = [
+    { crate = "windows_x86_64_msvc@0.52.6", reason = "The windows crates are notoriously duplicate" },
+    { crate = "windows_x86_64_gnu@0.52.6", reason = "The windows crates are notoriously duplicate" },
+    { crate = "windows-targets@0.52.6", reason = "The windows crates are notoriously duplicate" },
+    { crate = "windows-sys@0.59.0", reason = "The windows crates are notoriously duplicate" },
+]
