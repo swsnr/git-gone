@@ -11,7 +11,7 @@ categories = ["development-tools", "command-line-utilities"]
 authors = ["Sebastian Wiesner <sebastian@swsnr.de>"]
 edition = "2024"
 include = ["src/*.rs", "*.md", "LICENSE", "README,md"]
-rust-version = "1.87"
+rust-version = "1.89"
 
 [dependencies]
 anyhow = "1.0.98"
