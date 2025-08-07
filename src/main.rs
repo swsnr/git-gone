@@ -66,10 +66,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .filter_map(std::result::Result::ok)
         // Find all refs that have a configured tracking branch on the remote
         .filter(|reference| {
-            if let Some(Ok(refname)) = reference.remote_tracking_ref_name(Direction::Fetch) {
-                if let Ok(None) = repo.try_find_reference(refname.as_ref()) {
-                    return true;
-                }
+            if let Some(Ok(refname)) = reference.remote_tracking_ref_name(Direction::Fetch)
+                && let Ok(None) = repo.try_find_reference(refname.as_ref())
+            {
+                return true;
             }
             false
         });
