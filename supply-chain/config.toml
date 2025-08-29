@@ -46,10 +46,6 @@ criteria = "safe-to-run"
 version = "0.10.0"
 criteria = "safe-to-run"
 
-[[exemptions.getrandom]]
-version = "0.3.2"
-criteria = "safe-to-run"
-
 [[exemptions.hash32]]
 version = "0.3.1"
 criteria = "safe-to-run"
