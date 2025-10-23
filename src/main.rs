@@ -14,6 +14,7 @@
     clippy::let_underscore_must_use,
     clippy::let_underscore_untyped,
 )]
+#![forbid(unsafe_code)]
 
 use anyhow::Result;
 use gix::remote::Direction;
