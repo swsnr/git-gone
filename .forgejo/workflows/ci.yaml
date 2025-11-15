@@ -1,0 +1,12 @@
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  test-all:
+    runs-on: swsnr-rust
+    steps:
+      - uses: actions/checkout@v5
+      - run: just test-all
