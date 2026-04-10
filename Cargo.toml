@@ -14,9 +14,9 @@ include = ["src/*.rs", "*.md", "LICENSE", "README,md"]
 rust-version = "1.89"
 
 [dependencies]
-anyhow = "1.0.98"
-gix = { version = "0.73.0", default-features = false }
-clap = { version = "4.5.1", default-features = false, features = [
+anyhow = "1.0.102"
+gix = { version = "0.81.0", default-features = false, features = ["sha1"] }
+clap = { version = "4.6.0", default-features = false, features = [
     "std",
     # Auto-generate help and usage info
     "help",
