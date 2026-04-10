@@ -12,7 +12,7 @@ jobs:
       - run: echo "PATH=${HOME}/.cargo/bin:${PATH}" >> "${FORGEJO_ENV}"
       - run: rustup toolchain install stable --profile minimal --component clippy,rustfmt
       - uses: actions/checkout@v5
-      - uses: cargo fmt
-      - uses: cargo build --locked
-      - uses: cargo clippy --locked
-      - uses: cargo test --locked
+      - run: cargo fmt
+      - run: cargo build --locked
+      - run: cargo clippy --locked
+      - run: cargo test --locked
