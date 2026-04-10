@@ -6,7 +6,7 @@ on:
 
 jobs:
   test:
-    runs-on: codeberg-tiny-lazy
+    runs-on: codeberg-small-lazy
     steps:
       - run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain none
       - run: echo "PATH=${HOME}/.cargo/bin:${PATH}" >> "${FORGEJO_ENV}"
