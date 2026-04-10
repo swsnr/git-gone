@@ -5,8 +5,14 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  test-all:
-    runs-on: swsnr-rust
+  test:
+    runs-on: codeberg-tiny-lazy
     steps:
+      - run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain none
+      - run: echo "PATH=${HOME}/.cargo/bin:${PATH}" >> "${FORGEJO_ENV}"
+      - run: rustup toolchain install stable --profile minimal --component clippy,rustfmt
       - uses: actions/checkout@v5
-      - run: just test-all
+      - uses: cargo fmt
+      - uses: cargo build --locked
+      - uses: cargo clippy --locked
+      - uses: cargo test --locked
